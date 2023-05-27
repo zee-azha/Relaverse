@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        buildConfigField("String", "BASE_URL", '"https://relaverse.com"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -77,10 +78,13 @@ dependencies {
     /* Swipe */
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     /* Navigation */
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
+
+
+    /* CircleImageView */
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 }

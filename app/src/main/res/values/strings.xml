@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Relaverse</string>
+
     <string name="title">Title Campaign</string>
     <string name="location">Location</string>
     <string name="count">999</string>
@@ -18,4 +19,31 @@
     <string name="home">Home</string>
     <string name="campaign">Your Campaign</string>
     <string name="profile">Profile</string>
+
+    <!-- Auth, Event, Profile Location-->
+    <string name="regis_here"><u>Register Here</u></string>
+    <string name="login_here"><u>Login Here</u></string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="relaverse_logo">Relaverse Logo</string>
+    <string name="start">Start</string>
+    <string name="welcome_desc">Aplikasi yang membantu relawan pekerjaan sosial menemukan tempat yang perlu bantuan kita</string>
+    <string name="title_desc">Welcome to Relawan Universe</string>
+    <string name="relaverse_moto">#GotongRoyong</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="add_event_photo">Add Event Photo</string>
+    <string name="event_name">Event Name</string>
+    <string name="phone_contact">Phone Contact</string>
+    <string name="event_description">Event Description</string>
+    <string name="event_location">Event Location</string>
+    <string name="link_group_whatsapp">Link Group WhatsApp</string>
+    <string name="event_date">Event Date</string>
+    <string name="create_event">Create Event</string>
+    <string name="title_activity_location">LocationActivity</string>
+    <string name="save_location">Save Location</string>
+    <string name="event_detail_location">Event Detail Location</string>
+    <!-- -->
+
 </resources>
