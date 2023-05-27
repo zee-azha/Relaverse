@@ -1,8 +1,7 @@
 package com.bangkit.relaverse.ui.profile
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.bangkit.relaverse.R
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.relaverse.databinding.ActivityProfileBinding
 
 class ProfileActivity : AppCompatActivity() {
