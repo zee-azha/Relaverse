@@ -1,13 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.Relaverse" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Relaverse" parent="Base.Theme.Relaverse" />
-
-    <style name="Button.Green" parent="ThemeOverlay.AppCompat">
-        <item name="colorAccent">@color/jungle_green</item>
+    <style name="Theme.Relaverse" parent="Base.Theme.Relaverse">
+        <item name="android:windowIsTranslucent">true</item>
     </style>
+
 </resources>

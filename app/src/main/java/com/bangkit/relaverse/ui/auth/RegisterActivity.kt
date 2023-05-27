@@ -1,8 +1,7 @@
 package com.bangkit.relaverse.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.bangkit.relaverse.R
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.relaverse.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {

@@ -5,6 +5,4 @@ import com.bangkit.relaverse.data.RelaverseRepository
 
 class MainViewModel(
     private val repository: RelaverseRepository,
-) : ViewModel() {
-
-}
+) : ViewModel()

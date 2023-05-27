@@ -1,7 +1,7 @@
 package com.bangkit.relaverse.ui.main.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.relaverse.R
 
 class DetailsHomeActivity : AppCompatActivity() {

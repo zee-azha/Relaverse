@@ -4,33 +4,44 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.bangkit.relaverse.databinding.ActivitySplashScreenBinding
+import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.ui.main.MainActivity
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashScreenBinding
 
+    private val viewModel by viewModels<AuthViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Thread {
-            try {
-                Thread.sleep(2000)
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
-            // kalau sudah pernah login langsung ke home
-            startActivity(Intent(this@SplashScreen, WelcomeActivity::class.java))
-
-        }.start()
-
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                viewModel.getToken().observe(this) { token ->
+                    if (token != "") {
+                        startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+                    } else {
+                        startActivity(Intent(this@SplashScreen, WelcomeActivity::class.java))
+                    }
+                }
+            }, 2000
+        )
     }
 
     override fun onResume() {
