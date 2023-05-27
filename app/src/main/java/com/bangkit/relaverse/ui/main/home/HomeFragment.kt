@@ -57,6 +57,7 @@ class HomeFragment : Fragment() {
         binding.tvCurrentLocation.setOnClickListener {
             viewModel.logout()
             startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+            //remove backstack
         }
     }
 

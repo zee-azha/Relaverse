@@ -36,8 +36,10 @@ class SplashScreen : AppCompatActivity() {
                 viewModel.getToken().observe(this) { token ->
                     if (token != "") {
                         startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+                        finishAffinity()
                     } else {
                         startActivity(Intent(this@SplashScreen, WelcomeActivity::class.java))
+                        finishAffinity()
                     }
                 }
             }, 2000
