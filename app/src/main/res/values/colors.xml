@@ -3,9 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="jungle_green">#1FAB89</color>
-    <color name="lime_green">#62D2A2</color>
     <color name="green">#35A461</color>
     <color name="extra">#1CCCCD</color>
-    <color name="grey">#76777C</color>
-    <color name="red">#FF0000</color>
-    </resources>
+    <color name="text_box">#F0F5F9</color>
+</resources>

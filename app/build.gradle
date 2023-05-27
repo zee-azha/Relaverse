@@ -75,18 +75,16 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
-<<<<<<<<< Temporary merge branch 1
     /* Swipe */
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     /* Navigation */
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
 
-=========
+
     /* CircleImageView */
     implementation 'de.hdodenhof:circleimageview:3.1.0'
->>>>>>>>> Temporary merge branch 2
+
 }

@@ -25,6 +25,5 @@ class MainActivity : AppCompatActivity() {
 =========
 >>>>>>>>> Temporary merge branch 2
 
-
     }
 }
