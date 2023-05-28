@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Relaverse</string>
-
     <string name="title">Title Campaign</string>
     <string name="location">Location</string>
     <string name="count">999</string>
@@ -19,6 +18,7 @@
     <string name="home">Home</string>
     <string name="campaign">Your Campaign</string>
     <string name="profile">Profile</string>
+
 
     <!-- Auth, Event, Profile Location-->
     <string name="regis_here"><u>Register Here</u></string>
@@ -44,6 +44,5 @@
     <string name="title_activity_location">LocationActivity</string>
     <string name="save_location">Save Location</string>
     <string name="event_detail_location">Event Detail Location</string>
-    <!-- -->
-
+    <string name="register_error_message">Register Failed</string>
 </resources>

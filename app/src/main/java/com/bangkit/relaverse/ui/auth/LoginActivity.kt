@@ -50,8 +50,8 @@ class LoginActivity : AppCompatActivity() {
 
                             is Resource.Success -> {
                                 showLoading(false)
-                                showToast(result.data.message.toString())
-                                saveToken(result.data.token.toString())
+                                showToast(result.data?.message.toString())
+                                saveToken(result.data?.token.toString())
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finishAffinity()
                             }
