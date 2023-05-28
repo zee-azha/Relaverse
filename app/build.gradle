@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField("String", "BASE_URL", '"https://relaverse.com"')
+        buildConfigField("String", "BASE_URL", '"https://relaverse-api-dot-bangkit-386813.et.r.appspot.com/api/"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -59,6 +59,9 @@ dependencies {
 
     /* Data Store */
     implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    /* LiveData */
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
 
     /* KTX */
     implementation "androidx.activity:activity-ktx:1.7.1"

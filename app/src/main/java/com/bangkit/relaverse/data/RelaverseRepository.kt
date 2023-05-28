@@ -2,10 +2,14 @@ package com.bangkit.relaverse.data
 
 import com.bangkit.relaverse.data.local.UserPreferences
 import com.bangkit.relaverse.data.remote.response.LoginResponse
+import com.bangkit.relaverse.data.remote.response.RegisterResponse
 import com.bangkit.relaverse.data.remote.retrofit.ApiService
 import com.bangkit.relaverse.data.utils.Resource
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import okhttp3.Dispatcher
 
 
 class RelaverseRepository(
@@ -27,6 +31,20 @@ class RelaverseRepository(
             }
         }
     }
+
+    suspend fun registerUser(
+        name: String,phoneNumber: String, email: String, password: String
+    ):Flow<Resource<RegisterResponse>> = flow {
+        try {
+            val response = apiService.register(name,phoneNumber, email, password)
+            emit(Resource.Success(response))
+
+
+        }catch (e: Exception){
+            e.printStackTrace()
+            emit(Resource.Error(e.message.toString()))
+        }
+    }.flowOn(Dispatchers.IO)
 
     suspend fun saveToken(token: String) {
         userPreferences.saveToken(token)
