@@ -19,16 +19,23 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
             preferences[TOKEN_KEY] ?: ""
         }
     }
+    fun getId(): Flow<String>{
+        return dataStore.data.map { preferences ->
+            preferences[ID_USER] ?: ""
+        }
+    }
 
-    suspend fun saveToken(token: String) {
+    suspend fun saveToken(token: String,id: String) {
         dataStore.edit { preferences ->
             preferences[TOKEN_KEY] = token
+            preferences[ID_USER] = id
         }
     }
 
     suspend fun logout() {
         dataStore.edit { preferences ->
             preferences[TOKEN_KEY] = ""
+            preferences[ID_USER] =""
         }
     }
 
@@ -37,6 +44,7 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
         private var INSTANCE: UserPreferences? = null
 
         private val TOKEN_KEY = stringPreferencesKey("token")
+        private val ID_USER = stringPreferencesKey("id")
         const val USER_PREF = "user_pref"
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreferences {

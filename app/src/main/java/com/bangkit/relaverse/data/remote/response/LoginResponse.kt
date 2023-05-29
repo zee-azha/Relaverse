@@ -17,6 +17,15 @@ data class LoginResponse(
 	val token: String? = null,
 )
 
+data class LocationResponse(
+	@field:SerializedName("error")
+	val error: Boolean? = null,
+
+	@field:SerializedName("message")
+	val message: String? = null,
+
+	)
+
 data class User(
 
 	@field:SerializedName("id")

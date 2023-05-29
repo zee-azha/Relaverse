@@ -31,9 +31,9 @@ class AuthViewModel(
         repository.registerUser(name,phoneNUmber,email,password)
 
 
-    fun saveToken(token: String) {
+    fun saveToken(token: String,id: String) {
         viewModelScope.launch {
-            repository.saveToken(token)
+            repository.saveToken(token,id)
         }
     }
 
