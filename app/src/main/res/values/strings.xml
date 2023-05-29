@@ -45,4 +45,10 @@
     <string name="save_location">Save Location</string>
     <string name="event_detail_location">Event Detail Location</string>
     <string name="register_error_message">Register Failed</string>
+    <string name="error_permission">Permission Denied</string>
+    <string name="location_permission_denied">Permission Denied</string>
+    <string name="location_permission_denied_action">Change Setting</string>
+    <string name="please_activate_location_message">Please Active Location</string>
+    <string name="login_error_message">Login Failed, Please Check Your Email Or Password</string>
+    <string name="regist_error_message">Registration Failed, Please Check Your Data Field</string>
 </resources>
