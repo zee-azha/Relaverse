@@ -4,14 +4,12 @@ import com.bangkit.relaverse.data.local.UserPreferences
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
-import com.bangkit.relaverse.data.remote.response.User
 import com.bangkit.relaverse.data.remote.retrofit.ApiService
 import com.bangkit.relaverse.data.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okhttp3.Dispatcher
 
 
 class RelaverseRepository(
@@ -55,7 +53,7 @@ class RelaverseRepository(
             val response = apiService.changeLocation(token,id,lat,long)
             emit(Resource.Success(response))
         }catch (e:Exception){
-
+            emit(Resource.Error(e.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
 

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.ActivityLoginBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
@@ -46,7 +47,11 @@ class LoginActivity : AppCompatActivity() {
 
                             is Resource.Error -> {
                                 showLoading(false)
-                                showToast(result.error.toString())
+                                Toast.makeText(
+                                    this@LoginActivity,
+                                    resources.getString(R.string.login_error_message),
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
 
                             is Resource.Success -> {

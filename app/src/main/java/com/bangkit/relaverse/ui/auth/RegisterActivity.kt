@@ -36,44 +36,46 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun Register() {
-       binding.apply {
-           val name = nameEditText.text.toString().trim()
-           val email = binding.emailEditText.text.toString().trim()
-           val password = passwordEditText.text.toString().trim()
-           val phoneNumber = phoneEditText.text.toString().trim()
-           lifecycleScope.launch {
-               if (job.isActive) job.cancel()
-               job = launch {
-                   viewModel.register(name,phoneNumber, email, password).collect {
-                       when (it) {
-                           is Resource.Success -> {
-                               Toast.makeText(
-                                   this@RegisterActivity, it.data!!.message, Toast.LENGTH_LONG
-                               ).show()
-                               intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                               startActivity(intent)
-                               finish()
-                           }
+        binding.apply {
+            val name = nameEditText.text.toString().trim()
+            val email = binding.emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
+            val phoneNumber = phoneEditText.text.toString().trim()
+            lifecycleScope.launch {
+                if (job.isActive) job.cancel()
+                job = launch {
+                    viewModel.register(name, phoneNumber, email, password).collect {
+                        when (it) {
+                            is Resource.Success -> {
+                                showLoading(false)
+                                Toast.makeText(
+                                    this@RegisterActivity, it.data!!.message, Toast.LENGTH_LONG
+                                ).show()
+                                intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
 
-                           is Resource.Error -> {
-                               Toast.makeText(
-                                   this@RegisterActivity,
-                                  it.error.toString(),
-                                   Toast.LENGTH_LONG
-                               ).show()
-                           }
-                           is Resource.Loading -> {
-                               showLoading(true)
-                           }
-                       }
+                            is Resource.Error -> {
+                                showLoading(false)
+                                Toast.makeText(
+                                    this@RegisterActivity,
+                                    resources.getString(R.string.regist_error_message),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
 
+                            is Resource.Loading -> {
+                                showLoading(true)
+                            }
+                        }
+                    }
+                }
+            }
 
-                   }
-               }
-           }
-
-       }
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
