@@ -27,13 +27,13 @@ class AuthViewModel(
         }
     }
 
-    suspend fun register(name: String,phoneNUmber: String,email: String,password: String) =
-        repository.registerUser(name,phoneNUmber,email,password)
+    suspend fun register(name: String, phoneNUmber: String, email: String, password: String) =
+        repository.registerUser(name, phoneNUmber, email, password)
 
 
-    fun saveToken(token: String,id: String) {
+    fun saveToken(token: String, id: String) {
         viewModelScope.launch {
-            repository.saveToken(token,id)
+            repository.saveToken(token, id)
         }
     }
 

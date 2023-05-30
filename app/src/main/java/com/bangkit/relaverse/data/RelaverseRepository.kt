@@ -33,33 +33,33 @@ class RelaverseRepository(
     }
 
     suspend fun registerUser(
-        name: String,phoneNumber: String, email: String, password: String
-    ):Flow<Resource<RegisterResponse>> = flow {
+        name: String, phoneNumber: String, email: String, password: String,
+    ): Flow<Resource<RegisterResponse>> = flow {
         emit(Resource.Loading)
         try {
-            val response = apiService.register(name,phoneNumber, email, password)
+            val response = apiService.register(name, phoneNumber, email, password)
             emit(Resource.Success(response))
-        }catch (e: Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
             emit(Resource.Error(e.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
 
     suspend fun updateLocation(
-        token: String,id: Int,lat: String,long: String
-    ):Flow<Resource<LocationResponse>> = flow {
+        token: String, id: Int, lat: String, long: String,
+    ): Flow<Resource<LocationResponse>> = flow {
         emit(Resource.Loading)
         try {
-            val response = apiService.changeLocation(token,id,lat,long)
+            val response = apiService.changeLocation(token, id, lat, long)
             emit(Resource.Success(response))
-        }catch (e:Exception){
+        } catch (e: Exception) {
             emit(Resource.Error(e.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
 
 
-    suspend fun saveToken(token: String,id: String) {
-        userPreferences.saveToken(token,id)
+    suspend fun saveToken(token: String, id: String) {
+        userPreferences.saveToken(token, id)
     }
 
     suspend fun logout() {

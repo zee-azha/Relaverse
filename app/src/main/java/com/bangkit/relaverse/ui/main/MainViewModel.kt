@@ -8,12 +8,10 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val repository: RelaverseRepository,
-) : ViewModel(){
-
-
+) : ViewModel() {
 
     fun getToken(): Flow<String?> = repository.getToken()
-   fun getId(): Flow<String?> = repository.getId()
+    fun getId(): Flow<String?> = repository.getId()
 
     fun logout() {
         viewModelScope.launch {
@@ -21,10 +19,12 @@ class MainViewModel(
         }
     }
 
-    suspend fun updateLocation(token:String,
-                              id:Int,
-                              lat:String,
-                              long:String) = repository.updateLocation(token,id,lat,long)
+    suspend fun updateLocation(
+        token: String,
+        id: Int,
+        lat: String,
+        long: String,
+    ) = repository.updateLocation(token, id, lat, long)
 }
 
 
