@@ -20,19 +20,19 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("register")
-        suspend fun register(
+    suspend fun register(
         @Field("name") name: String,
         @Field("phone_number") phoneNumber: String,
         @Field("email") email: String,
-        @Field("password") password: String
-        ):RegisterResponse
+        @Field("password") password: String,
+    ): RegisterResponse
 
     @FormUrlEncoded
     @PUT("users/change-location/{id}")
     suspend fun changeLocation(
-    @Header("Authorization") auth: String,
-    @Path("id") id: Int,
-    @Field("latitude") latitude: String,
-    @Field("longitude") longitude: String
-    ):LocationResponse
+        @Header("Authorization") auth: String,
+        @Path("id") id: Int,
+        @Field("latitude") latitude: String,
+        @Field("longitude") longitude: String,
+    ): LocationResponse
 }

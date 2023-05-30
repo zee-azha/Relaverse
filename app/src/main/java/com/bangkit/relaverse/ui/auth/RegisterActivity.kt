@@ -32,12 +32,12 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             btnRegister.setOnClickListener {
-                Register()
+                register()
             }
         }
     }
 
-    private fun Register() {
+    private fun register() {
         binding.apply {
             val name = nameEditText.text.toString().trim()
             val email = binding.emailEditText.text.toString().trim()
@@ -51,7 +51,7 @@ class RegisterActivity : AppCompatActivity() {
                             is Resource.Success -> {
                                 showLoading(false)
                                 Toast.makeText(
-                                    this@RegisterActivity, it.data!!.message, Toast.LENGTH_LONG
+                                    this@RegisterActivity, it.data.message, Toast.LENGTH_LONG
                                 ).show()
                                 intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                                 startActivity(intent)
