@@ -4,7 +4,6 @@
     <string name="location">Location</string>
     <string name="count">999</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="current_location">Current Location</string>
     <string name="add_campaign">Add Campaign</string>
     <string name="details">Details</string>
@@ -44,11 +43,16 @@
     <string name="title_activity_location">LocationActivity</string>
     <string name="save_location">Save Location</string>
     <string name="event_detail_location">Event Detail Location</string>
-    <string name="register_error_message">Register Failed</string>
-    <string name="error_permission">Permission Denied</string>
-    <string name="location_permission_denied">Permission Denied</string>
-    <string name="location_permission_denied_action">Change Setting</string>
     <string name="please_activate_location_message">Please Active Location</string>
     <string name="login_error_message">Login Failed, Please Check Your Email Or Password</string>
     <string name="regist_error_message">Registration Failed, Please Check Your Data Field</string>
+    <string name="register">Register</string>
+    <string name="campaign_photo">Campaign Photo</string>
+    <string name="volunteer">Volunteer</string>
+    <string name="refresh_location">Refresh location</string>
+
+    <string name="campaigns">Campaigns</string>
+    <string name="about">About</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="address">Address</string>
 </resources>

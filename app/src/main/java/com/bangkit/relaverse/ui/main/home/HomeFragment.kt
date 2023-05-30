@@ -66,14 +66,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /* Test Logout */
-
         getLocation()
         binding.apply {
+            /* Test Logout */
             tvCurrentLocation.setOnClickListener {
                 viewModel.logout()
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
-                //remove backstack
+                requireActivity().finishAffinity()
+
             }
             refreshLocation.setOnClickListener {
                 getLocation()
