@@ -20,5 +20,4 @@
         android:name="com.bangkit.relaverse.ui.main.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 
-
 </navigation>
