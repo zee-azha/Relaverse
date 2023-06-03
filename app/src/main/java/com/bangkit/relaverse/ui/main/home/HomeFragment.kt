@@ -71,9 +71,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
-
-
         binding.apply {
             /* Test Logout */
             tvCurrentLocation.setOnClickListener {
@@ -106,9 +103,11 @@ class HomeFragment : Fragment() {
         Log.d("Tken", token)
         viewModel.campaignResponse.observe(viewLifecycleOwner) { result ->
             when (result) {
-                is Resource.Success -> result.data?.items?.let { hasil ->
-                    campaignAdapter.submitList(hasil)
-                    Log.d("berhasil", hasil.toString())
+                is Resource.Success -> {
+                    result.data.items.let { hasil ->
+                        campaignAdapter.submitList(hasil)
+                        Log.d("berhasil", hasil.toString())
+                    }
                 }
 
                 is Resource.Loading -> {

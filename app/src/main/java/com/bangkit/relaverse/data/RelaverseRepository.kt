@@ -1,6 +1,8 @@
 package com.bangkit.relaverse.data
 
 import com.bangkit.relaverse.data.local.UserPreferences
+import com.bangkit.relaverse.data.remote.response.DetailResponse
+import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
@@ -58,7 +60,7 @@ class RelaverseRepository(
     }.flowOn(Dispatchers.IO)
 
     suspend fun getAllCampaign(
-        token: String
+        token: String,
     ) = apiService.getCampaign(token)
 
     suspend fun saveToken(token: String, id: String) {
@@ -72,5 +74,37 @@ class RelaverseRepository(
     fun getToken(): Flow<String?> = userPreferences.getToken()
 
     fun getId(): Flow<String?> = userPreferences.getId()
+
+    suspend fun getDetailCampaignById(
+        token: String,
+        campaignId: Int,
+    ): Flow<Resource<DetailResponse>> {
+        return flow {
+            emit(Resource.Loading)
+            try {
+                val response = apiService.getCampaignById(token, campaignId)
+                emit(Resource.Success(response))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    suspend fun joinCampaign(
+        token: String,
+        campaignId: Int,
+    ): Flow<Resource<JoinResponse>> {
+        return flow {
+            emit(Resource.Loading)
+            try {
+                val response = apiService.joinCampaign(token, campaignId)
+                emit(Resource.Success(response))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(Resource.Error(e.message.toString()))
+            }
+        }
+    }
 
 }
