@@ -8,6 +8,7 @@ import com.bangkit.relaverse.data.di.Injection
 import com.bangkit.relaverse.ui.auth.AuthViewModel
 import com.bangkit.relaverse.ui.main.DetailViewModel
 import com.bangkit.relaverse.ui.main.MainViewModel
+import com.bangkit.relaverse.ui.main.profile.ProfileViewModel
 
 class ViewModelFactory private constructor(
     private val repository: RelaverseRepository,
@@ -21,6 +22,8 @@ class ViewModelFactory private constructor(
             return AuthViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
+            return ProfileViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

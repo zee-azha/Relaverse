@@ -5,6 +5,7 @@ import com.bangkit.relaverse.data.remote.response.DetailResponse
 import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
+import com.bangkit.relaverse.data.remote.response.ProfileResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.Field
@@ -41,7 +42,6 @@ interface ApiService {
         @Field("longitude") longitude: String,
     ): LocationResponse
 
-
     @GET("campaign/all")
     suspend fun getCampaign(
         @Header("Authorization") token: String,
@@ -58,5 +58,12 @@ interface ApiService {
     suspend fun joinCampaign(
         @Header("Authorization") auth: String,
         @Path("campaignId") campaignId: Int,
+        @Field("user_Id") userId: Int,
     ): JoinResponse
+
+    @GET("users/{userId}")
+    suspend fun getUserById(
+        @Header("Authorization") auth: String,
+        @Path("userId") userId: Int,
+    ): ProfileResponse
 }

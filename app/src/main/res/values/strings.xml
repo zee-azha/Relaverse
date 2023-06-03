@@ -15,7 +15,7 @@
     <string name="contact">Contact</string>
     <string name="list_volunteer">List Volunteer</string>
     <string name="home">Home</string>
-    <string name="campaign">Your Campaign</string>
+    <string name="campaign">Campaign</string>
     <string name="profile">Profile</string>
 
 
@@ -98,4 +98,5 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="save_profile">Save Profile</string>
 </resources>
