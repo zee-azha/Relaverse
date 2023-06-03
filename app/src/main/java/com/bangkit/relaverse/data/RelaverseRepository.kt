@@ -57,6 +57,9 @@ class RelaverseRepository(
         }
     }.flowOn(Dispatchers.IO)
 
+    suspend fun getAllCampaign(
+        token: String
+    ) = apiService.getCampaign(token)
 
     suspend fun saveToken(token: String, id: String) {
         userPreferences.saveToken(token, id)
