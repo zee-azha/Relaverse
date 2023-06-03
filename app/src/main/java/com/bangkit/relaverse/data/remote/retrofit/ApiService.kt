@@ -1,10 +1,13 @@
 package com.bangkit.relaverse.data.remote.retrofit
 
+import com.bangkit.relaverse.data.remote.response.DetailResponse
+import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -35,4 +38,18 @@ interface ApiService {
         @Field("latitude") latitude: String,
         @Field("longitude") longitude: String,
     ): LocationResponse
+
+    @FormUrlEncoded
+    @GET("campaign/{campaignId}")
+    suspend fun getCampaignById(
+        @Header("Authorization") auth: String,
+        @Path("campaignId") campaignId: Int,
+    ): DetailResponse
+
+    @FormUrlEncoded
+    @POST("campaign/volunteer/{campaignId}")
+    suspend fun joinCampaign(
+        @Header("Authorization") auth: String,
+        @Path("campaignId") campaignId: Int,
+    ): JoinResponse
 }
