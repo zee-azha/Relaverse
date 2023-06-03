@@ -37,9 +37,10 @@ class DetailViewModel(
     fun joinCampaign(
         token: String,
         campaignId: Int,
+        userId: Int,
     ) {
         viewModelScope.launch {
-            repository.joinCampaign(token, campaignId).collect {
+            repository.joinCampaign(token, campaignId, userId).collect {
                 _joinResponse.value = it
             }
         }

@@ -74,22 +74,22 @@ class DetailsHomeActivity : AppCompatActivity() {
             phoneNumber.text = campaign.contact
 
             phoneNumber.setOnClickListener {
-                intentOpenWA("https://wa.me/${campaign.contact}")
+                intentOpenWA("https://wa.me/62${campaign.contact}")
             }
 
             btnJoin.setOnClickListener {
                 viewModel.apply {
                     getToken().observe(this@DetailsHomeActivity) { token ->
                         if (token != null) {
-                            joinCampaign(token, campaign.id)
+                            joinCampaign(token, campaign.id, campaign.userId)
                         }
                     }
-
+                    joinEvent()
                 }
 
-                joinEvent()
-
-                intentOpenWA(campaign.whatsappLink)
+                if (campaign.whatsappLink.isNotEmpty()) {
+                    intentOpenWA(campaign.whatsappLink)
+                }
             }
         }
     }

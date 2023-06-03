@@ -5,11 +5,13 @@ import com.bangkit.relaverse.data.remote.response.DetailResponse
 import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
+import com.bangkit.relaverse.data.remote.response.ProfileResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
 import com.bangkit.relaverse.data.remote.retrofit.ApiService
 import com.bangkit.relaverse.data.utils.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
@@ -94,17 +96,34 @@ class RelaverseRepository(
     suspend fun joinCampaign(
         token: String,
         campaignId: Int,
+        userId: Int,
     ): Flow<Resource<JoinResponse>> {
         return flow {
             emit(Resource.Loading)
             try {
-                val response = apiService.joinCampaign(token, campaignId)
+                val response = apiService.joinCampaign(token, campaignId, userId)
                 emit(Resource.Success(response))
             } catch (e: Exception) {
                 e.printStackTrace()
                 emit(Resource.Error(e.message.toString()))
             }
         }
+    }
+
+    suspend fun getUserById(
+        token: String,
+        userId: Int,
+    ): Flow<Resource<ProfileResponse>> {
+        return channelFlow {
+            send(Resource.Loading)
+            try {
+                val response = apiService.getUserById(token, userId)
+                send(Resource.Success(response))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                send(Resource.Error(e.message.toString()))
+            }
+        }.flowOn(Dispatchers.IO)
     }
 
 }
