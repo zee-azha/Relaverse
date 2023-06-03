@@ -10,7 +10,7 @@ data class CampaignResponse(
 
     @field:SerializedName("message") val message: String,
 
-    @field:SerializedName("campaigns") val items: List<CampaignData>
+    @field:SerializedName("campaigns") val items: List<CampaignData>,
 )
 
 @Parcelize

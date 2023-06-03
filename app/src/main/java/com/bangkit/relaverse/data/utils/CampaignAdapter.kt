@@ -1,6 +1,7 @@
 package com.bangkit.relaverse.data.utils
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.databinding.ItemListCampaignBinding
+import com.bangkit.relaverse.ui.main.home.DetailsHomeActivity
 import com.bumptech.glide.Glide
 
 class CampaignAdapter(private val context: Context) :
@@ -24,12 +26,10 @@ class CampaignAdapter(private val context: Context) :
                 tvTitle.text = campaignData.title
                 tvLocation.text = campaignData.location
                 root.setOnClickListener {
-
-
-//                    val intent = Intent(root.context, DetailActivity::class.java).apply {
-//                        putExtra(DetailActivity.STORY_ID, story.id)
-//                    }
-//                    root.context.startActivity(intent)
+                    val intent = Intent(root.context, DetailsHomeActivity::class.java).apply {
+                        putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
+                    }
+                    root.context.startActivity(intent)
                 }
             }
         }

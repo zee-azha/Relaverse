@@ -1,6 +1,8 @@
 package com.bangkit.relaverse.data.remote.retrofit
 
 import com.bangkit.relaverse.data.remote.response.CampaignResponse
+import com.bangkit.relaverse.data.remote.response.DetailResponse
+import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
@@ -42,6 +44,19 @@ interface ApiService {
 
     @GET("campaign/all")
     suspend fun getCampaign(
-        @Header("Authorization") token: String
+        @Header("Authorization") token: String,
     ): Response<CampaignResponse>
+
+    @GET("campaign/{campaignId}")
+    suspend fun getCampaignById(
+        @Header("Authorization") auth: String,
+        @Path("campaignId") campaignId: Int,
+    ): DetailResponse
+
+    @FormUrlEncoded
+    @POST("campaign/volunteer/{campaignId}")
+    suspend fun joinCampaign(
+        @Header("Authorization") auth: String,
+        @Path("campaignId") campaignId: Int,
+    ): JoinResponse
 }

@@ -37,6 +37,7 @@ class DetailsHomeActivity : AppCompatActivity() {
                 if (token != null) {
                     getDetailCampaignById(token, campaignId)
                 }
+
             }
             detailHomeResponse.observe(this@DetailsHomeActivity) { result ->
                 when (result) {
