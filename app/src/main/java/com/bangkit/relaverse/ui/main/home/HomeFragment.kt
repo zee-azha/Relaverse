@@ -15,7 +15,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.relaverse.R
+import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentHomeBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
@@ -36,6 +38,7 @@ class HomeFragment : Fragment() {
     private lateinit var geocoder: Geocoder
     var token: String = ""
     var id: String = ""
+    private lateinit var campaignAdapter: CampaignAdapter
     private var job: Job = Job()
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(requireContext())
@@ -59,6 +62,7 @@ class HomeFragment : Fragment() {
                     if (!UID.isNullOrEmpty()) id = UID
                 }
             }
+
         }
         return binding.root
     }
@@ -66,7 +70,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        getLocation()
+
+
+
+
         binding.apply {
             /* Test Logout */
             tvCurrentLocation.setOnClickListener {
@@ -77,9 +84,12 @@ class HomeFragment : Fragment() {
             }
             refreshLocation.setOnClickListener {
                 getLocation()
+                getCampaign()
             }
-
         }
+        getCampaign()
+        setAdapter()
+        getLocation()
     }
 
 
@@ -88,6 +98,29 @@ class HomeFragment : Fragment() {
     ) { isGranted ->
         if (isGranted) {
             getLocation()
+        }
+    }
+
+    private fun getCampaign() {
+        viewModel.getAllCampaign(token)
+        Log.d("Tken", token)
+        viewModel.campaignResponse.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Success -> result.data?.items?.let { hasil ->
+                    campaignAdapter.submitList(hasil)
+                    Log.d("berhasil", hasil.toString())
+                }
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.Error -> {
+
+                }
+            }
+
+
         }
     }
 
@@ -100,7 +133,6 @@ class HomeFragment : Fragment() {
                 if (location != null) {
                     val latLng = LatLng(location.latitude, location.longitude)
                     binding.apply {
-
                         lifecycleScope.launch {
                             if (job.isActive) job.cancel()
                             job = launch {
@@ -161,6 +193,17 @@ class HomeFragment : Fragment() {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
+
+    private fun setAdapter() {
+        campaignAdapter = CampaignAdapter(requireContext())
+        binding.apply {
+            rvCampaign.layoutManager = LinearLayoutManager(requireContext())
+            rvCampaign.setHasFixedSize(true)
+            rvCampaign.adapter = campaignAdapter
+
+        }
+    }
+
 
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
