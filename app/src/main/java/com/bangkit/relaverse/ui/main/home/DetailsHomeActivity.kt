@@ -73,6 +73,10 @@ class DetailsHomeActivity : AppCompatActivity() {
             location.text = campaign.location
             phoneNumber.text = campaign.contact
 
+            openMap.setOnClickListener {
+                openMaps(campaign.lat, campaign.lon, campaign.title, campaign.location)
+            }
+
             phoneNumber.setOnClickListener {
                 intentOpenWA("https://wa.me/62${campaign.contact}")
             }
@@ -118,6 +122,18 @@ class DetailsHomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun openMaps(lat: Float?, lon: Float?, title: String, address: String) {
+        startActivity(
+            Intent(this@DetailsHomeActivity, MapsActivity::class.java)
+                .apply {
+                    putExtra(MapsActivity.LAT, lat!!)
+                    putExtra(MapsActivity.LON, lon!!)
+                    putExtra(MapsActivity.TITLE, title)
+                    putExtra(MapsActivity.ADDRESS, address)
+                }
+        )
     }
 
     private fun showLoading(isLoading: Boolean) {
