@@ -41,7 +41,7 @@ class ProfileFragment : Fragment() {
                 }
             }
 
-            profileResponse.observe(requireActivity()) { result ->
+            profileResponse.observe(viewLifecycleOwner) { result ->
                 when (result) {
                     is Resource.Loading -> {
                         showLoading(true)
@@ -76,7 +76,11 @@ class ProfileFragment : Fragment() {
     private fun latLngToAddress(lat: Float, lon: Float): String {
         val geocoder = Geocoder(requireActivity(), Locale.getDefault())
 
-        val address = geocoder.getFromLocation(lat.toDouble(), lon.toDouble(), 1)
+        val address = geocoder.getFromLocation(
+            lat.toDouble(),
+            lon.toDouble(),
+            1
+        )
         return address!![0].locality.toString()
     }
 
