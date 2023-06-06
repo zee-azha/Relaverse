@@ -2,22 +2,52 @@ package com.bangkit.relaverse.ui.main.campaign
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.relaverse.data.utils.CampaignAdapter
+import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentCampaignBinding
+import com.bangkit.relaverse.ui.ViewModelFactory
 import com.bangkit.relaverse.ui.create_event.CreateEventActivity
+import com.bangkit.relaverse.ui.main.MainViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class CampaignFragment : Fragment() {
 
     private lateinit var binding: FragmentCampaignBinding
+    var token: String = ""
+    var id: String = ""
+    private lateinit var campaignAdapter: CampaignAdapter
+    private var job: Job = Job()
+    private val viewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCampaignBinding.inflate(inflater, container, false)
+        lifecycleScope.launch {
+            launch {
+                viewModel.getToken().collect { tokenID ->
+                    if (!tokenID.isNullOrEmpty()) token = tokenID
+                }
+            }
+            launch {
+                viewModel.getId().collect { UID ->
+                    if (!UID.isNullOrEmpty()) id = UID
+                }
+            }
+
+        }
         return binding.root
     }
 
@@ -26,6 +56,44 @@ class CampaignFragment : Fragment() {
 
         binding.fabAdd.setOnClickListener {
             startActivity(Intent(requireActivity(), CreateEventActivity::class.java))
+        }
+        getCampaign()
+        setAdapter()
+
+    }
+
+    private fun getCampaign() {
+        viewModel.getCampaignByUserId(token,id.toInt())
+        Log.d("Tken", token)
+        Log.d("angka",id)
+        viewModel.myCampaignResponse.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Resource.Success -> {
+                    result.data.items.let { hasil ->
+                        campaignAdapter.submitList(hasil)
+                        Log.d("berhasil", hasil.toString())
+                    }
+                }
+
+                is Resource.Loading -> {
+
+                }
+
+                is Resource.Error -> {
+
+                }
+            }
+
+
+        }
+    }
+    private fun setAdapter() {
+        campaignAdapter = CampaignAdapter(requireContext())
+        binding.apply {
+            rvCampaign.layoutManager = LinearLayoutManager(requireContext())
+            rvCampaign.setHasFixedSize(true)
+            rvCampaign.adapter = campaignAdapter
+
         }
     }
 

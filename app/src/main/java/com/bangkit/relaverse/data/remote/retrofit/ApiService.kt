@@ -62,6 +62,12 @@ interface ApiService {
         @Path("campaignId") campaignId: Int,
     ): DetailResponse
 
+    @GET("campaign/my-campaigns/{userId}")
+    suspend fun getCampaignByUserId(
+        @Header("Authorization") auth: String,
+        @Path("userId") userId: Int,
+    ): Response<CampaignResponse>
+
     @FormUrlEncoded
     @POST("campaign/volunteer/{campaignId}")
     suspend fun joinCampaign(

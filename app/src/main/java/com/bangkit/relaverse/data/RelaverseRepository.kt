@@ -67,6 +67,9 @@ class RelaverseRepository(
     suspend fun getAllCampaign(
         token: String,
     ) = apiService.getCampaign(token)
+    suspend fun getCampaignByUserId(
+        token: String,id : Int
+    ) = apiService.getCampaignByUserId(token,id)
     suspend fun addCampaign(
         token: String, photoEvent: MultipartBody.Part,title: RequestBody, name: RequestBody, userId: RequestBody, latitude: RequestBody, longitude: RequestBody, contact: RequestBody, description: RequestBody, date: RequestBody, location: RequestBody, link:RequestBody
     ): Flow<Resource<CreateCampaignResponse>> = flow {
