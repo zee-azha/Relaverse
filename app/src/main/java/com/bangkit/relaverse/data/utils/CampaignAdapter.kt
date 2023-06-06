@@ -25,6 +25,7 @@ class CampaignAdapter(private val context: Context) :
 
                 tvTitle.text = campaignData.title
                 tvLocation.text = campaignData.location
+                tvDate.text = campaignData.date
                 root.setOnClickListener {
                     val intent = Intent(root.context, DetailsHomeActivity::class.java).apply {
                         putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)

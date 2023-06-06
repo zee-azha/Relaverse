@@ -15,7 +15,7 @@
     <string name="contact">Contact</string>
     <string name="list_volunteer">List Volunteer</string>
     <string name="home">Home</string>
-    <string name="campaign">Campaign</string>
+    <string name="campaign">Your Campaign</string>
     <string name="profile">Profile</string>
 
 
@@ -99,5 +99,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="save_profile">Save Profile</string>
-    <string name="title_activity_maps">MapsActivity</string>
+    <string name="add_location">Add Location</string>
+    <string name="error_permission">Not getting permissio</string>
+    <string name="choose_picture">Choose Picture</string>
 </resources>

@@ -26,12 +26,48 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
         }
     }
 
+
     suspend fun saveToken(token: String, id: String) {
         dataStore.edit { preferences ->
             preferences[TOKEN_KEY] = token
             preferences[ID_USER] = id
+
         }
     }
+    suspend fun saveLocation(location: String, lat: String, lng: String) {
+        dataStore.edit { preferences ->
+            preferences[LOCATION] = location
+            preferences[LAT] = lat
+            preferences[LNG] = lng
+
+        }
+    }
+    fun getLoc(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[LOCATION] ?: ""
+        }
+    }
+
+    fun getLat(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[LAT] ?: ""
+        }
+    }
+    fun getLng(): Flow<String> {
+        return dataStore.data.map { preferences ->
+            preferences[LNG] ?: ""
+        }
+    }
+    suspend fun deleteLoc() {
+        dataStore.edit { preferences ->
+            preferences[LOCATION] = ""
+            preferences[LAT] = ""
+            preferences[LNG] = ""
+
+        }
+    }
+
+
 
     suspend fun logout() {
         dataStore.edit { preferences ->
@@ -46,7 +82,11 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
 
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val ID_USER = stringPreferencesKey("id")
+        private val LOCATION = stringPreferencesKey("location")
+        private val LAT = stringPreferencesKey("lat")
+        private val LNG = stringPreferencesKey("lng")
         const val USER_PREF = "user_pref"
+
 
         fun getInstance(dataStore: DataStore<Preferences>): UserPreferences {
             return INSTANCE ?: synchronized(this) {
