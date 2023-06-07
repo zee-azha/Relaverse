@@ -15,6 +15,12 @@ import com.bumptech.glide.Glide
 class CampaignAdapter(private val context: Context) :
     ListAdapter<CampaignData, CampaignAdapter.ViewHolder>(DIFF_CALLBACK) {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+
     inner class ViewHolder(private val binding: ItemListCampaignBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(campaignData: CampaignData) {
@@ -26,14 +32,20 @@ class CampaignAdapter(private val context: Context) :
                 tvTitle.text = campaignData.title
                 tvLocation.text = campaignData.location
                 tvDate.text = campaignData.date
+
                 root.setOnClickListener {
-                    val intent = Intent(root.context, DetailsHomeActivity::class.java).apply {
-                        putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
-                    }
-                    root.context.startActivity(intent)
+//                    val intent = Intent(root.context, DetailsHomeActivity::class.java).apply {
+//                        putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
+//                    }
+//                    root.context.startActivity(intent)
+                    onItemClickCallback.onItemClicked(campaignData)
                 }
             }
         }
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(campaignData: CampaignData)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

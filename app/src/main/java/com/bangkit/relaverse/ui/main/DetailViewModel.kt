@@ -8,15 +8,19 @@ import androidx.lifecycle.viewModelScope
 import com.bangkit.relaverse.data.RelaverseRepository
 import com.bangkit.relaverse.data.remote.response.DetailResponse
 import com.bangkit.relaverse.data.remote.response.JoinResponse
+import com.bangkit.relaverse.data.remote.response.VolunteerResponse
 import com.bangkit.relaverse.data.utils.Resource
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+
 
 class DetailViewModel(
     private val repository: RelaverseRepository,
 ) : ViewModel() {
 
     fun getToken(): LiveData<String?> = repository.getToken().asLiveData()
-
+    fun getAuth(): Flow<String?> = repository.getToken()
+    fun getId(): Flow<String?> = repository.getId()
     private val _detailHomeResponse = MutableLiveData<Resource<DetailResponse>>()
     val detailHomeResponse get() = _detailHomeResponse
 
@@ -34,6 +38,10 @@ class DetailViewModel(
     private val _joinResponse = MutableLiveData<Resource<JoinResponse>>()
     val joinResponse get() = _joinResponse
 
+    suspend fun checkCampaign(
+        token: String,
+        userId: Int,
+    ) = repository.getVolunteerByUserId(token,userId)
     fun joinCampaign(
         token: String,
         campaignId: Int,

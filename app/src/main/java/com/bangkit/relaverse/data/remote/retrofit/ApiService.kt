@@ -8,6 +8,7 @@ import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.ProfileResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
+import com.bangkit.relaverse.data.remote.response.VolunteerResponse
 import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -61,11 +62,12 @@ interface ApiService {
         @Header("Authorization") auth: String,
         @Path("campaignId") campaignId: Int,
     ): DetailResponse
-    @GET("campaign/{campaignId}")
+
+    @GET("campaign/volunteer/{userId}")
     suspend fun getVolunteerByUserId(
         @Header("Authorization") auth: String,
-        @Path("campaignId") campaignId: Int,
-    ): DetailResponse
+        @Path("userId") userId: Int,
+    ): VolunteerResponse
 
     @GET("campaign/my-campaigns/{userId}")
     suspend fun getCampaignByUserId(

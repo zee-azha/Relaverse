@@ -3,21 +3,30 @@ package com.bangkit.relaverse.ui.main.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.bangkit.relaverse.data.remote.response.Campaign
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.ActivityDetailsHomeBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
 import com.bangkit.relaverse.ui.main.DetailViewModel
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.observeOn
+import kotlinx.coroutines.launch
+import kotlin.math.log
 
 class DetailsHomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailsHomeBinding
 
+    var token: String = ""
+    var id: String = ""
+    var campaignId : Int? = null
     private val viewModel by viewModels<DetailViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -27,18 +36,37 @@ class DetailsHomeActivity : AppCompatActivity() {
         binding = ActivityDetailsHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        lifecycleScope.launch {
+            launch {
+                viewModel.getAuth().collect { tokenID ->
+                    if (!tokenID.isNullOrEmpty()) token = tokenID
+                }
+            }
+            launch {
+                viewModel.getId().collect { UID ->
+                    if (!UID.isNullOrEmpty()) id = UID
+                }
+            }
+
+        }
+        checkCampaignUser()
         loadDetail()
+
     }
 
     private fun loadDetail() {
-        val campaignId = intent.getIntExtra(CAMPAIGN_ID, 0)
+         campaignId = intent.getIntExtra(CAMPAIGN_ID, 0)
         viewModel.apply {
             getToken().observe(this@DetailsHomeActivity) { token ->
                 if (token != null) {
-                    getDetailCampaignById(token, campaignId)
+                    getDetailCampaignById(token, campaignId!!)
+
                 }
 
+
             }
+
+
             detailHomeResponse.observe(this@DetailsHomeActivity) { result ->
                 when (result) {
                     is Resource.Loading -> {
@@ -52,7 +80,6 @@ class DetailsHomeActivity : AppCompatActivity() {
 
                     is Resource.Success -> {
                         showLoading(false)
-                        showToast(result.data.message)
                         showDetailData(result.data.campaign)
                     }
                 }
@@ -122,6 +149,55 @@ class DetailsHomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun checkCampaignUser(){
+
+               lifecycleScope.launch {
+                   viewModel.checkCampaign(token,id.toInt()).collect{
+                       when(it){
+                           is Resource.Loading -> {
+                               showLoading(true)
+
+                           }
+
+                           is Resource.Error -> {
+                               showLoading(false)
+                           }
+
+                           is Resource.Success ->{
+                               it.data.items.let{  data->
+                                   var j  = 0
+
+                                   for (i in data.list.indices) {
+                                       if (campaignId.toString() != data.list[j].id.toString()) {
+
+                                           binding.btnJoin.isEnabled = true
+
+                                          j++
+
+                                       } else {
+                                           binding.btnJoin.isEnabled = false
+                                       }
+
+
+                                   }
+
+
+
+
+                               }
+
+                           }
+                       }
+
+                   }
+               }
+
+
+
+
+
     }
 
     private fun openMaps(lat: Float?, lon: Float?, title: String, address: String) {

@@ -71,7 +71,6 @@ class CampaignFragment : Fragment() {
                 is Resource.Success -> {
                     result.data.items.let { hasil ->
                         campaignAdapter.submitList(hasil)
-                        Log.d("berhasil", hasil.toString())
                     }
                 }
 

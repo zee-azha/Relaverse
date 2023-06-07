@@ -17,6 +17,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.relaverse.R
+import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentHomeBinding
@@ -100,13 +101,11 @@ class HomeFragment : Fragment() {
 
     private fun getCampaign() {
         viewModel.getAllCampaign(token)
-        Log.d("Tken", token)
         viewModel.campaignResponse.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
                     result.data.items.let { hasil ->
                         campaignAdapter.submitList(hasil)
-                        Log.d("berhasil", hasil.toString())
                     }
                 }
 
@@ -144,21 +143,14 @@ class HomeFragment : Fragment() {
                                     when (it) {
                                         is Resource.Success -> {
                                             showLoading(false)
-                                            Toast.makeText(
-                                                context, it.data.message, Toast.LENGTH_LONG
-                                            ).show()
-
                                             geocoder =
                                                 Geocoder(requireContext(), Locale.getDefault())
-
                                             val address = geocoder.getFromLocation(
                                                 latLng.latitude, latLng.longitude, 1
                                             )
                                             tvCurrentLocation.text =
                                                 address?.get(0)!!.locality.toString()
-
                                         }
-
                                         is Resource.Error -> {
                                             showLoading(false)
                                             Toast.makeText(
@@ -201,7 +193,18 @@ class HomeFragment : Fragment() {
             rvCampaign.adapter = campaignAdapter
 
         }
+        campaignAdapter.setOnItemClickCallback(object : CampaignAdapter.OnItemClickCallback {
+
+
+            override fun onItemClicked(campaignData: CampaignData) {
+                val intent = Intent(context, DetailsHomeActivity::class.java)
+                intent.putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
+                startActivity(intent)
+            }
+        })
     }
+
+
 
 
     private fun showLoading(isLoading: Boolean) {

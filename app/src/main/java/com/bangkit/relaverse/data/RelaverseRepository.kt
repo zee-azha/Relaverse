@@ -8,6 +8,7 @@ import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.ProfileResponse
 import com.bangkit.relaverse.data.remote.response.RegisterResponse
+import com.bangkit.relaverse.data.remote.response.VolunteerResponse
 import com.bangkit.relaverse.data.remote.retrofit.ApiService
 import com.bangkit.relaverse.data.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -70,6 +71,17 @@ class RelaverseRepository(
     suspend fun getCampaignByUserId(
         token: String,id : Int
     ) = apiService.getCampaignByUserId(token,id)
+    suspend fun getVolunteerByUserId(
+        token: String,id : Int
+    ) : Flow<Resource<VolunteerResponse>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = apiService.getVolunteerByUserId(token, id)
+            emit(Resource.Success(response))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.message.toString()))
+        }
+    }.flowOn(Dispatchers.IO)
     suspend fun addCampaign(
         token: String, photoEvent: MultipartBody.Part,title: RequestBody, name: RequestBody, userId: RequestBody, latitude: RequestBody, longitude: RequestBody, contact: RequestBody, description: RequestBody, date: RequestBody, location: RequestBody, link:RequestBody
     ): Flow<Resource<CreateCampaignResponse>> = flow {
