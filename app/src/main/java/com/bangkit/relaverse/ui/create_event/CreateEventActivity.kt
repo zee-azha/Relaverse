@@ -191,7 +191,7 @@ class CreateEventActivity : AppCompatActivity() {
             val link = eventWAEditText.text.toString().toRequestBody("text/plain".toMediaType())
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
-                "photo", file.name, requestImageFile
+                "photoEvent", file.name, requestImageFile
             )
             lifecycleScope.launch {
                 launch {
@@ -219,9 +219,6 @@ class CreateEventActivity : AppCompatActivity() {
                                 Toast.makeText(
                                     this@CreateEventActivity, it.data.message, Toast.LENGTH_LONG
                                 ).show()
-                                intent =
-                                    Intent(this@CreateEventActivity, CampaignFragment::class.java)
-                                startActivity(intent)
                                 finish()
                             }
 
