@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.relaverse.data.RelaverseRepository
 import com.bangkit.relaverse.data.di.Injection
 import com.bangkit.relaverse.ui.auth.AuthViewModel
+import com.bangkit.relaverse.ui.create_event.CreateEventViewModel
 import com.bangkit.relaverse.ui.main.DetailViewModel
 import com.bangkit.relaverse.ui.main.MainViewModel
+import com.bangkit.relaverse.ui.main.campaign.ListUserViewModel
 import com.bangkit.relaverse.ui.main.profile.ProfileViewModel
 
 class ViewModelFactory private constructor(
@@ -22,8 +24,12 @@ class ViewModelFactory private constructor(
             return AuthViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(repository) as T
-        } else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
+        }else if (modelClass.isAssignableFrom(CreateEventViewModel::class.java)) {
+            return CreateEventViewModel(repository) as T
+        }else if (modelClass.isAssignableFrom(ProfileViewModel::class.java)) {
             return ProfileViewModel(repository) as T
+        }else if (modelClass.isAssignableFrom(ListUserViewModel::class.java)) {
+            return ListUserViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
     }

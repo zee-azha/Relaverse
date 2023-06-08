@@ -13,6 +13,12 @@ data class CampaignResponse(
     @field:SerializedName("campaigns") val items: List<CampaignData>,
 )
 
+data class CreateCampaignResponse(
+
+    @field:SerializedName("error") val error: Boolean,
+    @field:SerializedName("message") val message: String
+)
+
 @Parcelize
 data class CampaignData(
     @field:SerializedName("id")
@@ -44,6 +50,9 @@ data class CampaignData(
 
     @field:SerializedName("location")
     val location: String,
+
+    @field:SerializedName("whatsappLink")
+    val link: String,
 
     @field:SerializedName("photoEvent")
     val photoEvent: String,

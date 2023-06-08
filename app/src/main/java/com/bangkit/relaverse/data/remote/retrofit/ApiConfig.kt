@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
     private const val baseURL = BuildConfig.BASE_URL
+    private const val testURL = "https://relaverse-api-dot-testing-388918.et.r.appspot.com/api/"
 
     fun getApiService(): ApiService {
         val loggingInterceptor = if (BuildConfig.DEBUG) {
