@@ -183,9 +183,6 @@ class DetailsHomeActivity : AppCompatActivity() {
 
                                    }
 
-
-
-
                                }
 
                            }

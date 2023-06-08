@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentCampaignBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
 import com.bangkit.relaverse.ui.create_event.CreateEventActivity
 import com.bangkit.relaverse.ui.main.MainViewModel
+import com.bangkit.relaverse.ui.main.home.DetailsHomeActivity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -26,7 +28,6 @@ class CampaignFragment : Fragment() {
     var token: String = ""
     var id: String = ""
     private lateinit var campaignAdapter: CampaignAdapter
-    private var job: Job = Job()
     private val viewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -64,8 +65,6 @@ class CampaignFragment : Fragment() {
 
     private fun getCampaign() {
         viewModel.getCampaignByUserId(token,id.toInt())
-        Log.d("Tken", token)
-        Log.d("angka",id)
         viewModel.myCampaignResponse.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
@@ -94,6 +93,15 @@ class CampaignFragment : Fragment() {
             rvCampaign.adapter = campaignAdapter
 
         }
+        campaignAdapter.setOnItemClickCallback(object : CampaignAdapter.OnItemClickCallback {
+
+
+            override fun onItemClicked(campaignData: CampaignData) {
+                val intent = Intent(context, DetailsCampaign::class.java)
+                intent.putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
+                startActivity(intent)
+            }
+        })
     }
 
 }

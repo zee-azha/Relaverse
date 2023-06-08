@@ -71,6 +71,9 @@ class RelaverseRepository(
     suspend fun getCampaignByUserId(
         token: String,id : Int
     ) = apiService.getCampaignByUserId(token,id)
+    suspend fun getVolunteerUser(
+        token: String,id : Int
+    ) = apiService.getVolunteerUser(token,id)
     suspend fun getVolunteerByUserId(
         token: String,id : Int
     ) : Flow<Resource<VolunteerResponse>> = flow {
