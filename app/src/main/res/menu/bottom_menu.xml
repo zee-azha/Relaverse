@@ -5,6 +5,10 @@
         android:title="@string/home"
         android:icon="@drawable/baseline_home_24" />
     <item
+        android:id="@+id/joinedFragment"
+        android:title="@string/joined_campaign"
+        android:icon="@drawable/baseline_handshake_24" />
+    <item
         android:id="@+id/campaignFragment"
         android:title="@string/campaign"
         android:icon="@drawable/baseline_calendar_month_24" />

@@ -30,19 +30,11 @@ class AuthViewModel(
     suspend fun register(name: String, phoneNUmber: String, email: String, password: String) =
         repository.registerUser(name, phoneNUmber, email, password)
 
-
     fun saveToken(token: String, id: String) {
         viewModelScope.launch {
             repository.saveToken(token, id)
         }
     }
 
-    fun logout() {
-        viewModelScope.launch {
-            repository.logout()
-        }
-    }
-
     fun getToken(): LiveData<String?> = repository.getToken().asLiveData()
-
 }

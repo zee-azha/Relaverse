@@ -11,6 +11,11 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
+        android:id="@+id/joinedFragment"
+        android:name="com.bangkit.relaverse.ui.main.joined.JoinedFragment"
+        tools:layout="@layout/fragment_joined" />
+
+    <fragment
         android:id="@+id/campaignFragment"
         android:name="com.bangkit.relaverse.ui.main.campaign.CampaignFragment"
         tools:layout="@layout/fragment_campaign" />

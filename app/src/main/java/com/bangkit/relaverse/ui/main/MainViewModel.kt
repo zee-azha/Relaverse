@@ -1,6 +1,5 @@
 package com.bangkit.relaverse.ui.main
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,7 +19,6 @@ class MainViewModel(
     val campaignResponse: LiveData<Resource<CampaignResponse>> = _campaignResponse
     val myCampaignResponse: LiveData<Resource<CampaignResponse>> = _myCampaignResponse
 
-
     fun getToken(): Flow<String?> = repository.getToken()
     fun getId(): Flow<String?> = repository.getId()
 
@@ -29,16 +27,17 @@ class MainViewModel(
             repository.logout()
         }
     }
-    fun getCampaignByUserId(token: String,id: Int) = viewModelScope.launch{
+
+    fun getCampaignByUserId(token: String, id: Int) = viewModelScope.launch {
         _myCampaignResponse.value = Resource.Loading
         try {
             val response = repository.getCampaignByUserId(token, id)
             _myCampaignResponse.value = Resource.Success(response.body()!!)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             _myCampaignResponse.value = Resource.Error(e.message)
-            Log.d("gagal",e.message.toString())
         }
     }
+
     fun getAllCampaign(token: String) = viewModelScope.launch {
         _campaignResponse.value = Resource.Loading
         try {

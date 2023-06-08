@@ -19,7 +19,6 @@ import kotlinx.coroutines.flow.flowOn
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
-
 class RelaverseRepository(
     private val apiService: ApiService,
     private val userPreferences: UserPreferences,
@@ -68,15 +67,18 @@ class RelaverseRepository(
     suspend fun getAllCampaign(
         token: String,
     ) = apiService.getCampaign(token)
+
     suspend fun getCampaignByUserId(
-        token: String,id : Int
-    ) = apiService.getCampaignByUserId(token,id)
+        token: String, id: Int,
+    ) = apiService.getCampaignByUserId(token, id)
+
     suspend fun getVolunteerUser(
-        token: String,id : Int
-    ) = apiService.getVolunteerUser(token,id)
+        token: String, id: Int,
+    ) = apiService.getVolunteerUser(token, id)
+
     suspend fun getVolunteerByUserId(
-        token: String,id : Int
-    ) : Flow<Resource<VolunteerResponse>> = flow {
+        token: String, id: Int,
+    ): Flow<Resource<VolunteerResponse>> = flow {
         emit(Resource.Loading)
         try {
             val response = apiService.getVolunteerByUserId(token, id)
@@ -85,12 +87,37 @@ class RelaverseRepository(
             emit(Resource.Error(e.message.toString()))
         }
     }.flowOn(Dispatchers.IO)
+
     suspend fun addCampaign(
-        token: String, photoEvent: MultipartBody.Part,title: RequestBody, name: RequestBody, userId: RequestBody, latitude: RequestBody, longitude: RequestBody, contact: RequestBody, description: RequestBody, date: RequestBody, location: RequestBody, link:RequestBody
+        token: String,
+        photoEvent: MultipartBody.Part,
+        title: RequestBody,
+        name: RequestBody,
+        userId: RequestBody,
+        latitude: RequestBody,
+        longitude: RequestBody,
+        contact: RequestBody,
+        description: RequestBody,
+        date: RequestBody,
+        location: RequestBody,
+        link: RequestBody,
     ): Flow<Resource<CreateCampaignResponse>> = flow {
         emit(Resource.Loading)
         try {
-            val response = apiService.createCampaign(token,title,name,userId,latitude,longitude,contact,description,date,location,link,photoEvent)
+            val response = apiService.createCampaign(
+                token,
+                title,
+                name,
+                userId,
+                latitude,
+                longitude,
+                contact,
+                description,
+                date,
+                location,
+                link,
+                photoEvent
+            )
             emit(Resource.Success(response))
         } catch (e: Exception) {
             e.printStackTrace()
@@ -105,8 +132,9 @@ class RelaverseRepository(
     suspend fun logout() {
         userPreferences.logout()
     }
+
     suspend fun saveLocation(location: String, lat: String, lng: String) {
-        userPreferences.saveLocation(location,lat,lng)
+        userPreferences.saveLocation(location, lat, lng)
     }
 
     suspend fun delete() {

@@ -26,7 +26,6 @@ fun createTempFile(context: Context): File {
 }
 
 
-
 fun uriToFile(selectedImg: Uri, context: Context): File {
     val contentResolver: ContentResolver = context.contentResolver
     val myFile = createTempFile(context)
@@ -40,6 +39,7 @@ fun uriToFile(selectedImg: Uri, context: Context): File {
 
     return myFile
 }
+
 fun reduceFileImage(file: File): File {
     val bitmap = BitmapFactory.decodeFile(file.path)
     var compressQuality = 100

@@ -6,14 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.utils.Resource
@@ -21,16 +19,8 @@ import com.bangkit.relaverse.data.utils.reduceFileImage
 import com.bangkit.relaverse.data.utils.uriToFile
 import com.bangkit.relaverse.databinding.ActivityCreateEventBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
-import com.bangkit.relaverse.ui.auth.LoginActivity
-import com.bangkit.relaverse.ui.main.MainActivity
-import com.bangkit.relaverse.ui.main.MainViewModel
-import com.bangkit.relaverse.ui.main.campaign.CampaignFragment
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -56,7 +46,7 @@ class CreateEventActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-        requestCode: Int, permissions: Array<out String>, grantResults: IntArray
+        requestCode: Int, permissions: Array<out String>, grantResults: IntArray,
     ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionsGranted()) {
@@ -78,19 +68,19 @@ class CreateEventActivity : AppCompatActivity() {
         super.onResume()
         lifecycleScope.launch {
             launch {
-                viewModel.getloc().collect {
+                viewModel.getLoc().collect {
                     if (!it.isNullOrEmpty()) location = it
                 }
             }
 
             launch {
-                viewModel.getlng().collect {
+                viewModel.getLng().collect {
                     if (!it.isNullOrEmpty()) lng = it
                 }
             }
 
             launch {
-                viewModel.getlat().collect {
+                viewModel.getLat().collect {
                     if (!it.isNullOrEmpty()) lat = it
                 }
             }
@@ -119,35 +109,29 @@ class CreateEventActivity : AppCompatActivity() {
                 viewModel.getUserById(token, id.toInt()).collect {
                     when (it) {
                         is Resource.Loading -> {
-
+                            showLoading(true)
                         }
 
                         is Resource.Error -> {
-
+                            showLoading(false)
                         }
 
                         is Resource.Success -> {
-                            name = it.data.user.name.toString()
-
+                            showLoading(false)
+                            name = it.data.user.name
                         }
                     }
-
                 }
-
             }
-
-
-    }
+        }
 
 
         binding.apply {
-            Log.d("angka",token)
-            Log.d("simpan",location)
-            eventDateEditText.keyListener=null
+            eventDateEditText.keyListener = null
             eventDateEditText.setOnClickListener {
                 showDialog()
             }
-            pointLocation.setOnClickListener{
+            pointLocation.setOnClickListener {
                 startActivity(Intent(this@CreateEventActivity, LocationActivity::class.java))
             }
 
@@ -180,14 +164,17 @@ class CreateEventActivity : AppCompatActivity() {
         }
     }
 
-    private fun createCampaign(){
+    private fun createCampaign() {
         binding.apply {
             val file = reduceFileImage(getFile as File)
             val title = eventNameEditText.text.toString().toRequestBody("text/plain".toMediaType())
-            val contact = eventContactEditText.text.toString().toRequestBody("text/plain".toMediaType())
-            val description = eventDescriptionEditText.text.toString().toRequestBody("text/plain".toMediaType())
-            val date =  eventDateEditText.text.toString().toRequestBody("text/plain".toMediaType())
-            val location = eventLocationEditText.text.toString().toRequestBody("text/plain".toMediaType())
+            val contact =
+                eventContactEditText.text.toString().toRequestBody("text/plain".toMediaType())
+            val description =
+                eventDescriptionEditText.text.toString().toRequestBody("text/plain".toMediaType())
+            val date = eventDateEditText.text.toString().toRequestBody("text/plain".toMediaType())
+            val location =
+                eventLocationEditText.text.toString().toRequestBody("text/plain".toMediaType())
             val link = eventWAEditText.text.toString().toRequestBody("text/plain".toMediaType())
             val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
@@ -195,10 +182,6 @@ class CreateEventActivity : AppCompatActivity() {
             )
             lifecycleScope.launch {
                 launch {
-                    Log.d("test", token)
-                    Log.d("faiz", name)
-                    Log.d("coba", id)
-                    Log.d("lok", lat + lng)
                     viewModel.createEvent(
                         token,
                         title,
@@ -215,7 +198,7 @@ class CreateEventActivity : AppCompatActivity() {
                     ).collect {
                         when (it) {
                             is Resource.Success -> {
-
+                                showLoading(false)
                                 Toast.makeText(
                                     this@CreateEventActivity, it.data.message, Toast.LENGTH_LONG
                                 ).show()
@@ -223,7 +206,7 @@ class CreateEventActivity : AppCompatActivity() {
                             }
 
                             is Resource.Error -> {
-
+                                showLoading(false)
                                 Toast.makeText(
                                     this@CreateEventActivity,
                                     resources.getString(R.string.regist_error_message),
@@ -232,35 +215,44 @@ class CreateEventActivity : AppCompatActivity() {
                             }
 
                             is Resource.Loading -> {
-
+                                showLoading(true)
                             }
                         }
                     }
                 }
-                }
+            }
 
         }
     }
-private fun showDialog() {
-    val newCalendar = Calendar.getInstance()
-    val datePickerDialog = DatePickerDialog(
-        this,
-        { view, year, monthOfYear, dayOfMonth ->
-            val newDate = Calendar.getInstance()
-            newDate[year, monthOfYear] = dayOfMonth
-            binding?.eventDateEditText?.setText(dateFormatter.format(newDate.time))
-        }, newCalendar[Calendar.YEAR], newCalendar[Calendar.MONTH],
-        newCalendar[Calendar.DAY_OF_MONTH]
-    )
-    datePickerDialog.show()
-}
 
+    private fun showDialog() {
+        val newCalendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, year, monthOfYear, dayOfMonth ->
+                val newDate = Calendar.getInstance()
+                newDate[year, monthOfYear] = dayOfMonth
+                binding.eventDateEditText.setText(dateFormatter.format(newDate.time))
+            }, newCalendar[Calendar.YEAR], newCalendar[Calendar.MONTH],
+            newCalendar[Calendar.DAY_OF_MONTH]
+        )
+        datePickerDialog.show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        when (isLoading) {
+            true -> {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+
+            else -> {
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+    }
 
     companion object {
-
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
-
-
 }

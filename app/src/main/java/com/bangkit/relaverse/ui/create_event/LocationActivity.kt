@@ -1,6 +1,5 @@
 package com.bangkit.relaverse.ui.create_event
 
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -16,20 +15,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
-import androidx.lifecycle.lifecycleScope
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.databinding.ActivityLocationBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import java.util.Locale
 
 class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -37,32 +31,30 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityLocationBinding
     private lateinit var geocoder: Geocoder
-    private var lat:String =""
+    private var lat: String = ""
     private var lng: String = ""
     private var location: String = ""
-    private var job: Job = Job()
     private val viewModel by viewModels<CreateEventViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLocationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         binding.btnSaveLocation.setOnClickListener {
 
-                    viewModel.saveLoc(location, lat, lng)
-                    finish()
-
-
+            viewModel.saveLoc(location, lat, lng)
+            finish()
         }
     }
 
+    @Suppress("DEPRECATION")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -71,14 +63,18 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isCompassEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
-
         mMap.setOnMapLongClickListener { latLng ->
             mMap.addMarker(
                 MarkerOptions()
                     .position(latLng)
                     .title("New Marker")
                     .snippet("Lat: ${latLng.latitude} Long: ${latLng.longitude}")
-                    .icon(vectorToBitmap(R.drawable.baseline_fmd_good_24, Color.parseColor("#35A461")))
+                    .icon(
+                        vectorToBitmap(
+                            R.drawable.baseline_fmd_good_24,
+                            Color.parseColor("#35A461")
+                        )
+                    )
 
             )
             geocoder =
@@ -91,8 +87,6 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             lat = latLng.latitude.toString()
             lng = latLng.longitude.toString()
             binding.eventLocationDetailEditText.setText(location)
-
-
         }
 
         getMyLocation()
@@ -119,6 +113,7 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
+
     private fun vectorToBitmap(@DrawableRes id: Int, @ColorInt color: Int): BitmapDescriptor {
         val vectorDrawable = ResourcesCompat.getDrawable(resources, id, null)
         if (vectorDrawable == null) {

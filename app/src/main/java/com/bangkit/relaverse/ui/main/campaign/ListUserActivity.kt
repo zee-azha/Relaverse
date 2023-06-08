@@ -1,33 +1,27 @@
 package com.bangkit.relaverse.ui.main.campaign
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.relaverse.R
-import com.bangkit.relaverse.data.remote.response.CampaignData
-import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.data.utils.UserAdapter
-import com.bangkit.relaverse.databinding.ActivityCreateEventBinding
 import com.bangkit.relaverse.databinding.ActivityListUserBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
-import com.bangkit.relaverse.ui.main.DetailViewModel
-import com.bangkit.relaverse.ui.main.home.DetailsHomeActivity
 import kotlinx.coroutines.launch
 
 class ListUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityListUserBinding
     var token: String = ""
-    var campaignId : Int? = null
+    private var campaignId: Int? = null
     private lateinit var userAdapter: UserAdapter
     private val viewModel by viewModels<ListUserViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListUserBinding.inflate(layoutInflater)
@@ -45,22 +39,22 @@ class ListUserActivity : AppCompatActivity() {
     }
 
     private fun getUser() {
-        viewModel.listUserVolunteer(token,campaignId!!.toInt())
+        viewModel.listUserVolunteer(token, campaignId!!.toInt())
         viewModel.userListResponse.observe(this) { result ->
             when (result) {
                 is Resource.Success -> {
-                    result.data.user.let { hasil ->
-                        userAdapter.submitList(hasil)
-                        Log.d("bangke",hasil.toString())
+                    showLoading(false)
+                    result.data.user.let { data ->
+                        userAdapter.submitList(data)
                     }
                 }
 
                 is Resource.Loading -> {
-
+                    showLoading(true)
                 }
 
                 is Resource.Error -> {
-
+                    showLoading(false)
                 }
             }
 
@@ -75,6 +69,18 @@ class ListUserActivity : AppCompatActivity() {
             rvUser.setHasFixedSize(true)
             rvUser.adapter = userAdapter
 
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        when (isLoading) {
+            true -> {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+
+            else -> {
+                binding.progressBar.visibility = View.GONE
+            }
         }
     }
 

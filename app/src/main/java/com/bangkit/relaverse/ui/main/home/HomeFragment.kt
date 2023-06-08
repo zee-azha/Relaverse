@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +44,6 @@ class HomeFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -73,8 +71,7 @@ class HomeFragment : Fragment() {
 
 
         binding.apply {
-            /* Test Logout */
-            tvCurrentLocation.setOnClickListener {
+            btnLogout.setOnClickListener {
                 viewModel.logout()
                 startActivity(Intent(requireContext(), WelcomeActivity::class.java))
                 requireActivity().finishAffinity()
@@ -104,24 +101,24 @@ class HomeFragment : Fragment() {
         viewModel.campaignResponse.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Resource.Success -> {
-                    result.data.items.let { hasil ->
-                        campaignAdapter.submitList(hasil)
+                    showLoading(false)
+                    result.data.items.let { data ->
+                        campaignAdapter.submitList(data)
                     }
                 }
 
                 is Resource.Loading -> {
-
+                    showLoading(true)
                 }
 
                 is Resource.Error -> {
-
+                    showLoading(false)
                 }
             }
-
-
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun getLocation() {
         if (ContextCompat.checkSelfPermission(
                 requireContext().applicationContext, Manifest.permission.ACCESS_FINE_LOCATION
@@ -151,6 +148,7 @@ class HomeFragment : Fragment() {
                                             tvCurrentLocation.text =
                                                 address?.get(0)!!.locality.toString()
                                         }
+
                                         is Resource.Error -> {
                                             showLoading(false)
                                             Toast.makeText(
@@ -163,15 +161,11 @@ class HomeFragment : Fragment() {
 
                                         }
                                     }
-
                                 }
                             }
                         }
-
-
                     }
 
-                    Log.d("longlat", latLng.longitude.toString())
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -186,7 +180,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAdapter() {
-        campaignAdapter = CampaignAdapter(requireContext())
+        campaignAdapter = CampaignAdapter()
         binding.apply {
             rvCampaign.layoutManager = LinearLayoutManager(requireContext())
             rvCampaign.setHasFixedSize(true)
@@ -205,11 +199,8 @@ class HomeFragment : Fragment() {
     }
 
 
-
-
     private fun showLoading(isLoading: Boolean) {
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
-
 
 }

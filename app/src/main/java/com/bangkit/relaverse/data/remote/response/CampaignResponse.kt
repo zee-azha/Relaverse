@@ -6,17 +6,23 @@ import kotlinx.parcelize.Parcelize
 
 
 data class CampaignResponse(
-    @field:SerializedName("error") val error: Boolean,
+    @field:SerializedName("error")
+    val error: Boolean,
 
-    @field:SerializedName("message") val message: String,
+    @field:SerializedName("message")
+    val message: String,
 
-    @field:SerializedName("campaigns") val items: List<CampaignData>,
+    @field:SerializedName("campaigns")
+    val items: List<CampaignData>,
 )
 
 data class CreateCampaignResponse(
 
-    @field:SerializedName("error") val error: Boolean,
-    @field:SerializedName("message") val message: String
+    @field:SerializedName("error")
+    val error: Boolean,
+
+    @field:SerializedName("message")
+    val message: String,
 )
 
 @Parcelize
@@ -56,5 +62,4 @@ data class CampaignData(
 
     @field:SerializedName("photoEvent")
     val photoEvent: String,
-
-    ) : Parcelable
+) : Parcelable
