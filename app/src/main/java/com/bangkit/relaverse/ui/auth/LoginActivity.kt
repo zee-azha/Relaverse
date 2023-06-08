@@ -2,7 +2,6 @@ package com.bangkit.relaverse.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -56,12 +55,12 @@ class LoginActivity : AppCompatActivity() {
 
                             is Resource.Success -> {
                                 showLoading(false)
-                                showToast(result.data.message.toString())
+                                showToast(result.data.message)
                                 saveToken(
                                     result.data.token.toString(),
                                     result.data.user?.id.toString()
                                 )
-                                Log.d("IDS", result.data.user?.id.toString())
+
                                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                                 finishAffinity()
                             }

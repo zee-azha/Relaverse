@@ -7,8 +7,14 @@ data class ProfileResponse(
     val message: String,
     val user: User,
 )
+
 data class UserListResponse(
-    @field:SerializedName("error") val error: Boolean,
-    @field:SerializedName("message") val message: String,
-    @field:SerializedName("userList")  val user: List<User>
+    @field:SerializedName("error")
+    val error: Boolean,
+
+    @field:SerializedName("message")
+    val message: String,
+
+    @field:SerializedName("userList")
+    val user: List<User>,
 )

@@ -6,11 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.bangkit.relaverse.data.RelaverseRepository
-import com.bangkit.relaverse.data.remote.response.CampaignResponse
 import com.bangkit.relaverse.data.remote.response.DetailResponse
 import com.bangkit.relaverse.data.remote.response.JoinResponse
-import com.bangkit.relaverse.data.remote.response.UserListResponse
-import com.bangkit.relaverse.data.remote.response.VolunteerResponse
 import com.bangkit.relaverse.data.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -59,6 +56,4 @@ class DetailViewModel(
             }
         }
     }
-
-
 }

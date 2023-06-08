@@ -34,6 +34,7 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
 
         }
     }
+
     suspend fun saveLocation(location: String, lat: String, lng: String) {
         dataStore.edit { preferences ->
             preferences[LOCATION] = location
@@ -42,6 +43,7 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
 
         }
     }
+
     fun getLoc(): Flow<String> {
         return dataStore.data.map { preferences ->
             preferences[LOCATION] ?: ""
@@ -53,11 +55,13 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
             preferences[LAT] ?: ""
         }
     }
+
     fun getLng(): Flow<String> {
         return dataStore.data.map { preferences ->
             preferences[LNG] ?: ""
         }
     }
+
     suspend fun deleteLoc() {
         dataStore.edit { preferences ->
             preferences[LOCATION] = ""
@@ -66,7 +70,6 @@ class UserPreferences(private val dataStore: DataStore<Preferences>) {
 
         }
     }
-
 
 
     suspend fun logout() {

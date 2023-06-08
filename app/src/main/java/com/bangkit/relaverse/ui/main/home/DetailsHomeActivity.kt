@@ -3,22 +3,19 @@ package com.bangkit.relaverse.ui.main.home
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.remote.response.Campaign
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.ActivityDetailsHomeBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
 import com.bangkit.relaverse.ui.main.DetailViewModel
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.observeOn
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class DetailsHomeActivity : AppCompatActivity() {
 
@@ -26,7 +23,7 @@ class DetailsHomeActivity : AppCompatActivity() {
 
     var token: String = ""
     var id: String = ""
-    var campaignId : Int? = null
+    private var campaignId: Int? = null
     private val viewModel by viewModels<DetailViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -60,17 +57,13 @@ class DetailsHomeActivity : AppCompatActivity() {
     }
 
     private fun loadDetail() {
-         campaignId = intent.getIntExtra(CAMPAIGN_ID, 0)
+        campaignId = intent.getIntExtra(CAMPAIGN_ID, 0)
         viewModel.apply {
             getToken().observe(this@DetailsHomeActivity) { token ->
                 if (token != null) {
                     getDetailCampaignById(token, campaignId!!)
-
                 }
-
-
             }
-
 
             detailHomeResponse.observe(this@DetailsHomeActivity) { result ->
                 when (result) {
@@ -80,7 +73,7 @@ class DetailsHomeActivity : AppCompatActivity() {
 
                     is Resource.Error -> {
                         showLoading(false)
-                        showToast("Failed to load Campaign")
+                        showToast(getString(R.string.failed_to_load_campaign))
                     }
 
                     is Resource.Success -> {
@@ -110,7 +103,7 @@ class DetailsHomeActivity : AppCompatActivity() {
             }
 
             phoneNumber.setOnClickListener {
-                intentOpenWA("https://wa.me/62${campaign.contact}")
+                intentOpenWA(getString(R.string.wa_link, campaign.contact))
             }
 
             btnJoin.setOnClickListener {
@@ -145,7 +138,7 @@ class DetailsHomeActivity : AppCompatActivity() {
 
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast("Failed to join Campaign")
+                    showToast(getString(R.string.failed_join_campaign))
                 }
 
                 is Resource.Success -> {
@@ -156,50 +149,39 @@ class DetailsHomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkCampaignUser(){
+    private fun checkCampaignUser() {
+        lifecycleScope.launch {
+            viewModel.checkCampaign(token, id.toInt()).collect {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading(true)
+                    }
 
-               lifecycleScope.launch {
-                   viewModel.checkCampaign(token,id.toInt()).collect{
-                       when(it){
-                           is Resource.Loading -> {
-                               showLoading(true)
+                    is Resource.Error -> {
+                        showLoading(false)
+                    }
 
-                           }
+                    is Resource.Success -> {
+                        showLoading(false)
+                        it.data.items.let { data ->
+                            var j = 0
 
-                           is Resource.Error -> {
-                               showLoading(false)
-                           }
+                            for (i in data.list.indices) {
+                                if (campaignId.toString() != data.list[j].id.toString()) {
 
-                           is Resource.Success ->{
-                               it.data.items.let{  data->
-                                   var j  = 0
+                                    binding.btnJoin.isEnabled = true
+                                    j++
 
-                                   for (i in data.list.indices) {
-                                       if (campaignId.toString() != data.list[j].id.toString()) {
+                                } else {
+                                    binding.btnJoin.isEnabled = false
+                                }
 
-                                           binding.btnJoin.isEnabled = true
-                                            Log.d("sialan",data.list[j].id.toString())
-                                          j++
-
-                                       } else {
-                                           binding.btnJoin.isEnabled = false
-                                       }
-
-
-                                   }
-
-                               }
-
-                           }
-                       }
-
-                   }
-               }
-
-
-
-
-
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private fun openMaps(lat: Float?, lon: Float?, title: String, address: String) {

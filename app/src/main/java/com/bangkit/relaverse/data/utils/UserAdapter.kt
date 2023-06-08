@@ -1,10 +1,8 @@
 package com.bangkit.relaverse.data.utils
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityOptionsCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +10,7 @@ import com.bangkit.relaverse.data.remote.response.User
 import com.bangkit.relaverse.databinding.ItemListUserBinding
 
 
-class UserAdapter: ListAdapter<User, UserAdapter.ListViewHolder>(DIFF_CALLBACK) {
-
-
+class UserAdapter : ListAdapter<User, UserAdapter.ListViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding =
             ItemListUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -40,7 +36,7 @@ class UserAdapter: ListAdapter<User, UserAdapter.ListViewHolder>(DIFF_CALLBACK) 
         }
     }
 
-    companion object{
+    companion object {
         val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
             override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem == newItem

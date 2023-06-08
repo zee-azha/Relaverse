@@ -32,8 +32,12 @@
     <string name="relaverse_moto">#GotongRoyong</string>
     <string name="name">Name</string>
     <string name="phone">Phone</string>
+    <string name="failed_join_campaign">Failed to load Campaign</string>
     <string name="add_event_photo">Add Event Photo</string>
     <string name="event_name">Event Name</string>
+    <string name="wa_link">https://wa.me/62%s</string>
+    <string name="failed_to_load_campaign">Failed to load Campaign"</string>
+    <string name="failed_to_load_profile">Failed to load Profile User</string>
     <string name="phone_contact">Phone Contact</string>
     <string name="event_description">Event Description</string>
     <string name="event_location">Event Location</string>
@@ -103,4 +107,8 @@
     <string name="error_permission">Not getting permissio</string>
     <string name="choose_picture">Choose Picture</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="logout">Logout</string>
+    <string name="joined_campaign">Joined</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

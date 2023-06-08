@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 data class LoginResponse(
 
     @field:SerializedName("error")
-    val error: Boolean? = null,
+    val error: Boolean,
 
     @field:SerializedName("message")
-    val message: String? = null,
+    val message: String,
 
     @field:SerializedName("user")
     val user: User? = null,
@@ -19,29 +19,28 @@ data class LoginResponse(
 
 data class LocationResponse(
     @field:SerializedName("error")
-    val error: Boolean? = null,
+    val error: Boolean,
 
     @field:SerializedName("message")
-    val message: String? = null,
-
-    )
+    val message: String,
+)
 
 data class User(
 
     @field:SerializedName("id")
-    val id: Int? = null,
+    val id: Int,
 
     @field:SerializedName("name")
-    val name: String? = null,
+    val name: String,
 
     @field:SerializedName("phone_number")
-    val phoneNumber: String? = null,
+    val phoneNumber: String,
 
     @field:SerializedName("email")
-    val email: String? = null,
+    val email: String,
 
     @field:SerializedName("password")
-    val password: String? = null,
+    val password: String,
 
     @field:SerializedName("latitude")
     val latitude: Float? = null,

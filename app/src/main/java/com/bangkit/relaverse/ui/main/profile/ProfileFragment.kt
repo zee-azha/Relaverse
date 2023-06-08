@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.remote.response.User
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentProfileBinding
@@ -49,7 +50,7 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Error -> {
                         showLoading(false)
-                        showToast("Error")
+                        showToast(getString(R.string.failed_to_load_profile))
                     }
 
                     is Resource.Success -> {
@@ -73,6 +74,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    @Suppress("DEPRECATION")
     private fun latLngToAddress(lat: Float, lon: Float): String {
         val geocoder = Geocoder(requireActivity(), Locale.getDefault())
 

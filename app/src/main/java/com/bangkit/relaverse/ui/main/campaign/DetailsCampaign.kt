@@ -12,10 +12,8 @@ import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.remote.response.Campaign
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.ActivityDetailsCampaignBinding
-import com.bangkit.relaverse.databinding.ActivityDetailsHomeBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
 import com.bangkit.relaverse.ui.main.DetailViewModel
-import com.bangkit.relaverse.ui.main.home.DetailsHomeActivity
 import com.bangkit.relaverse.ui.main.home.MapsActivity
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
@@ -23,10 +21,9 @@ import kotlinx.coroutines.launch
 class DetailsCampaign : AppCompatActivity() {
 
 
-
     private lateinit var binding: ActivityDetailsCampaignBinding
     var token: String = ""
-    var campaignId : Int? = null
+    private var campaignId: Int? = null
     private val viewModel by viewModels<DetailViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -64,7 +61,7 @@ class DetailsCampaign : AppCompatActivity() {
 
                     is Resource.Error -> {
                         showLoading(false)
-                        showToast("Failed to load Campaign")
+                        showToast(getString(R.string.failed_join_campaign))
                     }
 
                     is Resource.Success -> {
@@ -94,11 +91,12 @@ class DetailsCampaign : AppCompatActivity() {
             }
 
             phoneNumber.setOnClickListener {
-                intentOpenWA("https://wa.me/62${campaign.contact}")
+                intentOpenWA(getString(R.string.wa_link, campaign.contact))
             }
 
         }
     }
+
     private fun intentOpenWA(url: String) {
         val i = Intent(Intent.ACTION_VIEW)
         i.data = Uri.parse(url)

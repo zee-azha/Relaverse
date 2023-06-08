@@ -1,7 +1,5 @@
 package com.bangkit.relaverse.data.utils
 
-import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -9,17 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.databinding.ItemListCampaignBinding
-import com.bangkit.relaverse.ui.main.home.DetailsHomeActivity
 import com.bumptech.glide.Glide
 
-class CampaignAdapter(private val context: Context) :
-    ListAdapter<CampaignData, CampaignAdapter.ViewHolder>(DIFF_CALLBACK) {
+class CampaignAdapter : ListAdapter<CampaignData, CampaignAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback){
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
-
 
     inner class ViewHolder(private val binding: ItemListCampaignBinding) :
         RecyclerView.ViewHolder(binding.root) {
