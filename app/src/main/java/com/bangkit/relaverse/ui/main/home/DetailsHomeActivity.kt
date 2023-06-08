@@ -54,6 +54,11 @@ class DetailsHomeActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        checkCampaignUser()
+    }
+
     private fun loadDetail() {
          campaignId = intent.getIntExtra(CAMPAIGN_ID, 0)
         viewModel.apply {
@@ -173,7 +178,7 @@ class DetailsHomeActivity : AppCompatActivity() {
                                        if (campaignId.toString() != data.list[j].id.toString()) {
 
                                            binding.btnJoin.isEnabled = true
-
+                                            Log.d("sialan",data.list[j].id.toString())
                                           j++
 
                                        } else {

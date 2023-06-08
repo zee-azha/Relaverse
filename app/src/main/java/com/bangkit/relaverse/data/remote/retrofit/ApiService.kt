@@ -64,7 +64,7 @@ interface ApiService {
         @Path("campaignId") campaignId: Int,
     ): DetailResponse
 
-    @GET("campaign/volunteer/{campaignId}")
+    @GET("campaign/volunteer/{userId}")
     suspend fun getVolunteerByUserId(
         @Header("Authorization") auth: String,
         @Path("userId") userId: Int,
