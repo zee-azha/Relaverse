@@ -25,8 +25,7 @@ class DetailViewModel(
     fun getId(): Flow<String?> = repository.getId()
     private val _detailHomeResponse = MutableLiveData<Resource<DetailResponse>>()
 
-    private val _userListResponse = MutableLiveData<Resource<UserListResponse>>()
-    val userListResponse: LiveData<Resource<UserListResponse>> = _userListResponse
+
     val detailHomeResponse get() = _detailHomeResponse
 
 
@@ -61,13 +60,5 @@ class DetailViewModel(
         }
     }
 
-   fun listUserVolunteer(token: String, id: Int) = viewModelScope.launch{
-        _userListResponse.value = Resource.Loading
-        try {
-            val response = repository.getVolunteerUser(token,id)
-            _userListResponse.value = Resource.Success(response.body()!!)
-        } catch (e: Exception) {
-            _userListResponse.value = Resource.Error(e.message)
-        }
-    }
+
 }

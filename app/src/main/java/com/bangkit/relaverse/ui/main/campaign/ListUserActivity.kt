@@ -25,7 +25,7 @@ class ListUserActivity : AppCompatActivity() {
     var token: String = ""
     var campaignId : Int? = null
     private lateinit var userAdapter: UserAdapter
-    private val viewModel by viewModels<DetailViewModel> {
+    private val viewModel by viewModels<ListUserViewModel> {
         ViewModelFactory.getInstance(this)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
