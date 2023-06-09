@@ -26,13 +26,9 @@ class CampaignAdapter : ListAdapter<CampaignData, CampaignAdapter.ViewHolder>(DI
 
                 tvTitle.text = campaignData.title
                 tvLocation.text = campaignData.location
-                tvDate.text = campaignData.date
+                tvDate.text = campaignData.date.withDateFormat()
 
                 root.setOnClickListener {
-//                    val intent = Intent(root.context, DetailsHomeActivity::class.java).apply {
-//                        putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
-//                    }
-//                    root.context.startActivity(intent)
                     onItemClickCallback.onItemClicked(campaignData)
                 }
             }

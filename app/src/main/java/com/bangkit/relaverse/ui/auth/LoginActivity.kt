@@ -2,12 +2,16 @@ package com.bangkit.relaverse.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.utils.Resource
+import com.bangkit.relaverse.data.utils.isValidEmail
+import com.bangkit.relaverse.data.utils.isValidPassword
 import com.bangkit.relaverse.databinding.ActivityLoginBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
 import com.bangkit.relaverse.ui.main.MainActivity
@@ -25,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        inputValidation()
         loginUser()
         toRegister()
     }
@@ -35,37 +40,45 @@ class LoginActivity : AppCompatActivity() {
             val password = binding.passwordEditText.text.toString()
 
             viewModel.apply {
-                login(email, password)
-
                 if (email.isNotEmpty() && password.isNotEmpty()) {
-                    loginResponse.observe(this@LoginActivity) { result ->
-                        when (result) {
-                            is Resource.Loading -> {
-                                showLoading(true)
-                            }
+                    if (binding.emailEditTextLayout.error == null && binding.passwordEditTextLayout.error == null) {
+                        login(email, password)
+                        loginResponse.observe(this@LoginActivity) { result ->
+                            when (result) {
+                                is Resource.Loading -> {
+                                    showLoading(true)
+                                }
 
-                            is Resource.Error -> {
-                                showLoading(false)
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    resources.getString(R.string.login_error_message),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                                is Resource.Error -> {
+                                    showLoading(false)
+                                    Toast.makeText(
+                                        this@LoginActivity,
+                                        resources.getString(R.string.login_error_message),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
 
-                            is Resource.Success -> {
-                                showLoading(false)
-                                showToast(result.data.message)
-                                saveToken(
-                                    result.data.token.toString(),
-                                    result.data.user?.id.toString()
-                                )
+                                is Resource.Success -> {
+                                    showLoading(false)
+                                    showToast(result.data.message)
+                                    saveToken(
+                                        result.data.token.toString(),
+                                        result.data.user?.id.toString()
+                                    )
 
-                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                                finishAffinity()
+                                    startActivity(
+                                        Intent(
+                                            this@LoginActivity,
+                                            MainActivity::class.java
+                                        )
+                                    )
+                                    finishAffinity()
+                                }
                             }
                         }
                     }
+                } else {
+                    showToast(getString(R.string.fill_blank))
                 }
             }
 
@@ -75,6 +88,58 @@ class LoginActivity : AppCompatActivity() {
     private fun toRegister() {
         binding.btnToRegis.setOnClickListener {
             startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+        }
+    }
+
+    private fun inputValidation() {
+        binding.apply {
+            emailEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.toString().trim().isValidEmail()) {
+                        emailEditTextLayout.error = null
+                    } else {
+                        emailEditTextLayout.error = getString(R.string.error_email)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+
+            binding.passwordEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.toString().trim().isValidPassword()) {
+                        passwordEditTextLayout.error = null
+                    } else {
+                        passwordEditTextLayout.error = getString(R.string.error_password, s?.length)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
         }
     }
 

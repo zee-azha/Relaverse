@@ -111,4 +111,8 @@
     <string name="joined_campaign">Joined</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fill_blank">Please don\'t leave it blank</string>
+    <string name="error_email">This is not a valid email format</string>
+    <string name="error_password">%d / 6</string>
+    <string name="error_phone">Please write down the phone number correctly 08XXXXXXXX"</string>
 </resources>

@@ -28,7 +28,7 @@ class UserAdapter : ListAdapter<User, UserAdapter.ListViewHolder>(DIFF_CALLBACK)
         RecyclerView.ViewHolder(binding.root) {
         fun bind(context: Context, lisUser: User) {
             with(binding) {
-                tvUser.text = lisUser.name.toString()
+                tvUser.text = lisUser.name
                 root.setOnClickListener {
 
                 }
