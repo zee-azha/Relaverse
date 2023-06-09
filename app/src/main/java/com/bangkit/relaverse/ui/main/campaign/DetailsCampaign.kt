@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.remote.response.Campaign
 import com.bangkit.relaverse.data.utils.Resource
+import com.bangkit.relaverse.data.utils.withDateFormat
 import com.bangkit.relaverse.databinding.ActivityDetailsCampaignBinding
 import com.bangkit.relaverse.ui.ViewModelFactory
 import com.bangkit.relaverse.ui.main.DetailViewModel
@@ -80,7 +81,7 @@ class DetailsCampaign : AppCompatActivity() {
                 .into(imageCampaign)
 
             tvCampaignTitle.text = campaign.title
-            date.text = campaign.date
+            date.text = campaign.date.withDateFormat()
             tvUser.text = campaign.name
             desc.text = campaign.description
             location.text = campaign.location
