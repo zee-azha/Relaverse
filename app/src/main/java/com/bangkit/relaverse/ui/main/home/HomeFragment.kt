@@ -187,9 +187,8 @@ class HomeFragment : Fragment() {
             rvCampaign.adapter = campaignAdapter
 
         }
+
         campaignAdapter.setOnItemClickCallback(object : CampaignAdapter.OnItemClickCallback {
-
-
             override fun onItemClicked(campaignData: CampaignData) {
                 val intent = Intent(context, DetailsHomeActivity::class.java)
                 intent.putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)

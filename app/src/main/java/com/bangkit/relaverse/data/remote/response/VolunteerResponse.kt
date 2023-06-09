@@ -21,38 +21,5 @@ data class UserData(
     val userId: String,
 
     @field:SerializedName("eventList")
-    val list: List<EventList>,
+    val list: List<CampaignData>,
 )
-
-data class EventList(
-    @field:SerializedName("campaigntId")
-    val id: Int,
-
-    @field:SerializedName("campaignTitle")
-    val title: String,
-
-    @field:SerializedName("campaigntName")
-    val name: String,
-
-    @field:SerializedName("campaignCreatorId")
-    val userId: String,
-
-    @field:SerializedName("campaignLat")
-    val latitude: Float,
-
-    @field:SerializedName("campaignLon")
-    val longitude: Float,
-
-    @field:SerializedName("campaignContact")
-    val contact: String,
-
-    @field:SerializedName("campaignDescription")
-    val description: String,
-
-    @field:SerializedName("campaignDate")
-    val date: String,
-
-    @field:SerializedName("campaignPhoto")
-    val campaignPhoto: String,
-)
-
