@@ -117,7 +117,7 @@ class LoginActivity : AppCompatActivity() {
 
             })
 
-            binding.passwordEditText.addTextChangedListener(object : TextWatcher {
+            passwordEditText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,

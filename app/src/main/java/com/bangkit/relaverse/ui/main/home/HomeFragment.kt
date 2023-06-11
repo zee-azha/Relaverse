@@ -69,11 +69,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         binding.apply {
             btnLogout.setOnClickListener {
                 viewModel.logout()
-                startActivity(Intent(requireContext(), WelcomeActivity::class.java))
+                startActivity(Intent(requireActivity(), WelcomeActivity::class.java))
                 requireActivity().finishAffinity()
 
             }

@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.bangkit.relaverse.data.RelaverseRepository
+import com.bangkit.relaverse.data.remote.response.DefaultResponse
 import com.bangkit.relaverse.data.remote.response.DetailResponse
-import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.utils.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -37,7 +37,7 @@ class DetailViewModel(
         }
     }
 
-    private val _joinResponse = MutableLiveData<Resource<JoinResponse>>()
+    private val _joinResponse = MutableLiveData<Resource<DefaultResponse>>()
     val joinResponse get() = _joinResponse
 
     suspend fun checkCampaign(

@@ -54,6 +54,11 @@
     <string name="campaign_photo">Campaign Photo</string>
     <string name="volunteer">Volunteer</string>
     <string name="refresh_location">Refresh location</string>
+    <string name="failed_edit_profile">Failed to Update Profile</string>
+    <string name="success_edit_profile">Success to Update Profile</string>
+    <string name="confirm_same_password">New password and Confirm new password must be same</string>
+    <string name="failed_change_password">Failed to change your password, make sure your current password is correct</string>
+    <string name="success_change_password">Success to change your password</string>
 
     <string name="campaigns">Campaigns</string>
     <string name="about">About</string>
@@ -115,4 +120,9 @@
     <string name="error_email">This is not a valid email format</string>
     <string name="error_password">%d / 6</string>
     <string name="error_phone">Please write down the phone number correctly 08XXXXXXXX"</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_new_password">Confirm new password</string>
 </resources>

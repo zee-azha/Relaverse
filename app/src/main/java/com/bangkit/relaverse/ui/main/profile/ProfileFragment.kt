@@ -1,5 +1,6 @@
 package com.bangkit.relaverse.ui.main.profile
 
+import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,13 +30,15 @@ class ProfileFragment : Fragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         loadProfile()
+        editProfile()
+        intentChangePassword()
         return binding.root
     }
 
     private fun loadProfile() {
         viewModel.apply {
-            getToken().observe(requireActivity()) { token ->
-                getUserId().observe(requireActivity()) { userId ->
+            getToken().observe(viewLifecycleOwner) { token ->
+                getUserId().observe(viewLifecycleOwner) { userId ->
                     if (token != null && userId != null) {
                         getUserById(token, userId.toInt())
                     }
@@ -84,6 +87,68 @@ class ProfileFragment : Fragment() {
             1
         )
         return address!![0].locality.toString()
+    }
+
+    private fun editProfile() {
+        binding.apply {
+            btnEditProfile.setOnClickListener {
+                when (btnEditProfile.text) {
+                    getString(R.string.edit_profile) -> {
+                        btnEditProfile.text = getString(R.string.save_profile)
+                        nameEditText.isEnabled = true
+                        emailEditText.isEnabled = true
+                        phoneEditText.isEnabled = true
+                    }
+
+                    getString(R.string.save_profile) -> {
+                        btnEditProfile.text = getString(R.string.edit_profile)
+                        nameEditText.isEnabled = false
+                        emailEditText.isEnabled = false
+                        phoneEditText.isEnabled = false
+
+                        viewModel.apply {
+                            getToken().observe(viewLifecycleOwner) { token ->
+                                getUserId().observe(viewLifecycleOwner) { userId ->
+                                    if (token != null && userId != null) {
+                                        putEditProfile(
+                                            token = token,
+                                            userId = userId.toInt(),
+                                            name = nameEditText.text.toString().trim(),
+                                            email = emailEditText.text.toString().trim(),
+                                            phoneNumber = phoneEditText.text.toString().trim()
+                                        )
+                                    }
+                                }
+                            }
+
+                            editProfileResponse.observe(viewLifecycleOwner) { result ->
+                                when (result) {
+                                    is Resource.Loading -> {
+                                        showLoading(true)
+                                    }
+
+                                    is Resource.Error -> {
+                                        showLoading(false)
+                                        showToast(getString(R.string.failed_edit_profile))
+                                    }
+
+                                    is Resource.Success -> {
+                                        showLoading(false)
+                                        showToast(getString(R.string.success_edit_profile))
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun intentChangePassword() {
+        binding.btnEditPassword.setOnClickListener {
+            startActivity(Intent(requireActivity(), PasswordActivity::class.java))
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {

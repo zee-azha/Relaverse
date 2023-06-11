@@ -2,12 +2,11 @@ package com.bangkit.relaverse.data.remote.retrofit
 
 import com.bangkit.relaverse.data.remote.response.CampaignResponse
 import com.bangkit.relaverse.data.remote.response.CreateCampaignResponse
+import com.bangkit.relaverse.data.remote.response.DefaultResponse
 import com.bangkit.relaverse.data.remote.response.DetailResponse
-import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.ProfileResponse
-import com.bangkit.relaverse.data.remote.response.RegisterResponse
 import com.bangkit.relaverse.data.remote.response.UserListResponse
 import com.bangkit.relaverse.data.remote.response.VolunteerResponse
 import okhttp3.MultipartBody
@@ -38,7 +37,7 @@ interface ApiService {
         @Field("phone_number") phoneNumber: String,
         @Field("email") email: String,
         @Field("password") password: String,
-    ): RegisterResponse
+    ): DefaultResponse
 
     @FormUrlEncoded
     @PUT("users/change-location/{id}")
@@ -84,7 +83,7 @@ interface ApiService {
         @Header("Authorization") auth: String,
         @Path("campaignId") campaignId: Int,
         @Field("user_Id") userId: Int,
-    ): JoinResponse
+    ): DefaultResponse
 
     @GET("users/{userId}")
     suspend fun getUserById(
@@ -108,4 +107,23 @@ interface ApiService {
         @Part("whatsappLink") link: RequestBody,
         @Part file: MultipartBody.Part,
     ): CreateCampaignResponse
+
+    @FormUrlEncoded
+    @PUT("users/edit-profile/{userId}")
+    suspend fun editProfile(
+        @Header("Authorization") auth: String,
+        @Path("userId") userId: Int,
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("phoneNumber") phoneNumber: String,
+    ): DefaultResponse
+
+    @FormUrlEncoded
+    @PUT("users/change-password/{userId}")
+    suspend fun changePassword(
+        @Header("Authorization") auth: String,
+        @Path("userId") userId: Int,
+        @Field("currentPassword") currentPassword: String,
+        @Field("newPassword") newPassword: String,
+    ): DefaultResponse
 }

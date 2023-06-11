@@ -2,12 +2,11 @@ package com.bangkit.relaverse.data
 
 import com.bangkit.relaverse.data.local.UserPreferences
 import com.bangkit.relaverse.data.remote.response.CreateCampaignResponse
+import com.bangkit.relaverse.data.remote.response.DefaultResponse
 import com.bangkit.relaverse.data.remote.response.DetailResponse
-import com.bangkit.relaverse.data.remote.response.JoinResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
 import com.bangkit.relaverse.data.remote.response.ProfileResponse
-import com.bangkit.relaverse.data.remote.response.RegisterResponse
 import com.bangkit.relaverse.data.remote.response.VolunteerResponse
 import com.bangkit.relaverse.data.remote.retrofit.ApiService
 import com.bangkit.relaverse.data.utils.Resource
@@ -41,7 +40,7 @@ class RelaverseRepository(
 
     suspend fun registerUser(
         name: String, phoneNumber: String, email: String, password: String,
-    ): Flow<Resource<RegisterResponse>> = flow {
+    ): Flow<Resource<DefaultResponse>> = flow {
         emit(Resource.Loading)
         try {
             val response = apiService.register(name, phoneNumber, email, password)
@@ -171,7 +170,7 @@ class RelaverseRepository(
         token: String,
         campaignId: Int,
         userId: Int,
-    ): Flow<Resource<JoinResponse>> {
+    ): Flow<Resource<DefaultResponse>> {
         return flow {
             emit(Resource.Loading)
             try {
@@ -198,6 +197,44 @@ class RelaverseRepository(
                 send(Resource.Error(e.message.toString()))
             }
         }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun editProfile(
+        token: String,
+        userId: Int,
+        email: String,
+        name: String,
+        phoneNumber: String,
+    ): Flow<Resource<DefaultResponse>> {
+        return channelFlow {
+            send(Resource.Loading)
+            try {
+                val response = apiService.editProfile(token, userId, name, email, phoneNumber)
+                send(Resource.Success(response))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                send(Resource.Error(e.message.toString()))
+            }
+        }
+    }
+
+    suspend fun changePassword(
+        token: String,
+        userId: Int,
+        currentPassword: String,
+        newPassword: String,
+    ): Flow<Resource<DefaultResponse>> {
+        return channelFlow {
+            send(Resource.Loading)
+            try {
+                val response =
+                    apiService.changePassword(token, userId, currentPassword, newPassword)
+                send(Resource.Success(response))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                send(Resource.Error(e.message.toString()))
+            }
+        }
     }
 
 }
