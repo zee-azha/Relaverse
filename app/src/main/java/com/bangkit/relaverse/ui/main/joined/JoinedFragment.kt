@@ -39,8 +39,8 @@ class JoinedFragment : Fragment() {
 
     private fun getJoinedCampaign() {
         viewModel.apply {
-            getToken().observe(requireActivity()) { token ->
-                getUserId().observe(requireActivity()) { userId ->
+            getToken().observe(viewLifecycleOwner) { token ->
+                getUserId().observe(viewLifecycleOwner) { userId ->
                     if (token != null && userId != null) {
                         getJoinedCampaignByUserId(token, userId.toInt())
                     }
