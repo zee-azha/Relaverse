@@ -82,4 +82,5 @@
     <string name="message_leave">Are you sure you want to leave this campaign?</string>
     <string name="click_add_location">Please click add location to fill the field</string>
     <string name="proper_location">Please select proper location</string>
+    <string name="message_logout">"Are you sure you want to log out? "</string>
 </resources>
