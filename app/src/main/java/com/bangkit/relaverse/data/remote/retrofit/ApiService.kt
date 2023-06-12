@@ -3,6 +3,7 @@ package com.bangkit.relaverse.data.remote.retrofit
 import com.bangkit.relaverse.data.remote.response.CampaignResponse
 import com.bangkit.relaverse.data.remote.response.CreateCampaignResponse
 import com.bangkit.relaverse.data.remote.response.DefaultResponse
+import com.bangkit.relaverse.data.remote.response.DeleteCampaignResponse
 import com.bangkit.relaverse.data.remote.response.DetailResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
@@ -12,6 +13,7 @@ import com.bangkit.relaverse.data.remote.response.VolunteerResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -108,6 +110,7 @@ interface ApiService {
         @Part file: MultipartBody.Part,
     ): CreateCampaignResponse
 
+
     @FormUrlEncoded
     @PUT("users/edit-profile/{userId}")
     suspend fun editProfile(
@@ -126,4 +129,15 @@ interface ApiService {
         @Field("currentPassword") currentPassword: String,
         @Field("newPassword") newPassword: String,
     ): DefaultResponse
+
+    @DELETE("campaign/delete/{campaignId}")
+    suspend fun deleteCampaign(
+        @Header("Authorization") auth: String,
+        @Path("campaignId") campaignId: Int,
+    ):DeleteCampaignResponse
+    @DELETE("campaign/leavecampaign/{campaignId}")
+    suspend fun leaveCampaign(
+        @Header("Authorization") auth: String,
+        @Path("campaignId") campaignId: Int,
+    ):DeleteCampaignResponse
 }

@@ -13,7 +13,8 @@ import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.remote.response.User
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentProfileBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.ProfileViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import java.util.Locale
 
 class ProfileFragment : Fragment() {

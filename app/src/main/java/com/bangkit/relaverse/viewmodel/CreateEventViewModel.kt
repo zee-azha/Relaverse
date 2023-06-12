@@ -1,4 +1,4 @@
-package com.bangkit.relaverse.ui.create_event
+package com.bangkit.relaverse.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

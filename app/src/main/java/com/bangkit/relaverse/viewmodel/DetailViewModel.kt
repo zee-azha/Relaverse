@@ -1,4 +1,4 @@
-package com.bangkit.relaverse.ui.main
+package com.bangkit.relaverse.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -10,6 +10,7 @@ import com.bangkit.relaverse.data.remote.response.DefaultResponse
 import com.bangkit.relaverse.data.remote.response.DetailResponse
 import com.bangkit.relaverse.data.utils.Resource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 
@@ -56,4 +57,12 @@ class DetailViewModel(
             }
         }
     }
+    suspend fun deleteCampaign(
+        token: String,
+        campaignId: Int,
+    ) = repository.deleteCampaign(token, campaignId)
+
+    suspend fun leaveCampaign(
+        token: String,campaignId: Int
+    ) = repository.leaveCampaign(token, campaignId)
 }

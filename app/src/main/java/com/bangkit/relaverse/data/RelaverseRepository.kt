@@ -3,6 +3,7 @@ package com.bangkit.relaverse.data
 import com.bangkit.relaverse.data.local.UserPreferences
 import com.bangkit.relaverse.data.remote.response.CreateCampaignResponse
 import com.bangkit.relaverse.data.remote.response.DefaultResponse
+import com.bangkit.relaverse.data.remote.response.DeleteCampaignResponse
 import com.bangkit.relaverse.data.remote.response.DetailResponse
 import com.bangkit.relaverse.data.remote.response.LocationResponse
 import com.bangkit.relaverse.data.remote.response.LoginResponse
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.Response
 
 class RelaverseRepository(
     private val apiService: ApiService,
@@ -74,6 +76,27 @@ class RelaverseRepository(
     suspend fun getVolunteerUser(
         token: String, id: Int,
     ) = apiService.getVolunteerUser(token, id)
+
+
+    suspend fun deleteCampaign(token: String,campaignId: Int): Flow<Resource<DeleteCampaignResponse>> = flow{
+        emit(Resource.Loading)
+        try {
+            val response = apiService.deleteCampaign(token,campaignId)
+            emit(Resource.Success(response))
+        }catch (e:Exception){
+            emit(Resource.Error(e.message))
+        }
+    }.flowOn(Dispatchers.IO)
+    suspend fun leaveCampaign(token: String,campaignId: Int): Flow<Resource<DeleteCampaignResponse>> = flow{
+        emit(Resource.Loading)
+
+        try {
+            val response = apiService.leaveCampaign(token,campaignId)
+            emit(Resource.Success(response))
+        }catch (e:Exception){
+            emit(Resource.Error(e.message))
+        }
+    }
 
     suspend fun getVolunteerByUserId(
         token: String, id: Int,

@@ -12,8 +12,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.bangkit.relaverse.databinding.ActivitySplashScreenBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bangkit.relaverse.ui.main.MainActivity
+import com.bangkit.relaverse.viewmodel.AuthViewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity() {

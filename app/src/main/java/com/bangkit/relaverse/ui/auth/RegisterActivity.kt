@@ -15,7 +15,8 @@ import com.bangkit.relaverse.data.utils.isValidEmail
 import com.bangkit.relaverse.data.utils.isValidPassword
 import com.bangkit.relaverse.data.utils.isValidPhoneNumber
 import com.bangkit.relaverse.databinding.ActivityRegisterBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.AuthViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

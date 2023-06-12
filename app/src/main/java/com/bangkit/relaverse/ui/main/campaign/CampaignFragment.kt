@@ -13,10 +13,9 @@ import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentCampaignBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bangkit.relaverse.ui.create_event.CreateEventActivity
-import com.bangkit.relaverse.ui.main.MainViewModel
-import com.bangkit.relaverse.ui.main.home.DetailsHomeActivity
+import com.bangkit.relaverse.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 
@@ -96,10 +95,16 @@ class CampaignFragment : Fragment() {
         campaignAdapter.setOnItemClickCallback(object : CampaignAdapter.OnItemClickCallback {
             override fun onItemClicked(campaignData: CampaignData) {
                 val intent = Intent(context, DetailsCampaign::class.java)
-                intent.putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
+                intent.putExtra(DetailsCampaign.CAMPAIGN_ID, campaignData.id)
+                intent.putExtra(DetailsCampaign.EXTRA_CODE, 0)
                 startActivity(intent)
             }
         })
+    }
+
+    override fun onResume() {
+        getCampaign()
+        super.onResume()
     }
 
     private fun showLoading(isLoading: Boolean) {

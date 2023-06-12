@@ -6,7 +6,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.databinding.ActivityMainBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

@@ -25,6 +25,13 @@ data class CreateCampaignResponse(
     val message: String,
 )
 
+data class DeleteCampaignResponse(
+    @field:SerializedName("error")
+    val error: Boolean,
+
+    @field:SerializedName("message")
+    val message: String,
+)
 @Parcelize
 data class CampaignData(
     @field:SerializedName("id")

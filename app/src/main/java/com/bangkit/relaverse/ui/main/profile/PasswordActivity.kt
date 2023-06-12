@@ -12,7 +12,8 @@ import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.data.utils.isValidPassword
 import com.bangkit.relaverse.databinding.ActivityPasswordBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.ProfileViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.google.android.material.textfield.TextInputLayout
 
 class PasswordActivity : AppCompatActivity() {

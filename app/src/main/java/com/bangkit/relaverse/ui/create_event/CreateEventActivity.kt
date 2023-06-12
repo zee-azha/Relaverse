@@ -6,6 +6,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -15,10 +17,14 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.utils.Resource
+import com.bangkit.relaverse.data.utils.isValidEmail
+import com.bangkit.relaverse.data.utils.isValidPassword
+import com.bangkit.relaverse.data.utils.isValidPhoneNumber
 import com.bangkit.relaverse.data.utils.reduceFileImage
 import com.bangkit.relaverse.data.utils.uriToFile
 import com.bangkit.relaverse.databinding.ActivityCreateEventBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.CreateEventViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -128,6 +134,7 @@ class CreateEventActivity : AppCompatActivity() {
 
         binding.apply {
             eventDateEditText.keyListener = null
+            eventLocationEditText.keyListener = null
             eventDateEditText.setOnClickListener {
                 showDialog()
             }
@@ -142,6 +149,8 @@ class CreateEventActivity : AppCompatActivity() {
                 createCampaign()
             }
         }
+        inputValidation()
+        setButtonEnable()
 
     }
 
@@ -164,6 +173,137 @@ class CreateEventActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun inputValidation() {
+        binding.apply {
+            eventNameEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.isNullOrEmpty()) {
+                        eventNameEditTextLayout.error = getString(R.string.fill_blank)
+                    } else {
+                        eventNameEditTextLayout.error = null
+                        setButtonEnable()
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+
+            eventDescriptionEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.toString().isNotEmpty()) {
+                        setButtonEnable()
+                        eventDescriptionEditText.error = null
+                    } else {
+                        eventDescriptionEditText.error = getString(R.string.fill_blank)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+            eventContactEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.toString().trim().isValidPhoneNumber()) {
+                        setButtonEnable()
+                        eventContactEditTextLayout.error = null
+                    } else {
+                        eventContactEditTextLayout.error =
+                            getString(R.string.error_phone)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+            eventLocationEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.toString().isNotEmpty()) {
+                        setButtonEnable()
+                        eventLocationEditTextLayout.error = null
+                    } else {
+                        eventLocationEditTextLayout.error =
+                            getString(R.string.fill_blank)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+
+            eventWAEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s.toString().isNotEmpty()) {
+                        eventWAEditTextLayout.error = null
+                        setButtonEnable()
+                    } else {
+                        eventWAEditTextLayout.error =
+                            getString(R.string.fill_blank)
+                    }
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+
+                }
+
+            })
+        }
+    }
+
     private fun createCampaign() {
         binding.apply {
             val file = reduceFileImage(getFile as File)
@@ -180,48 +320,57 @@ class CreateEventActivity : AppCompatActivity() {
             val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
                 "photoEvent", file.name, requestImageFile
             )
-            lifecycleScope.launch {
-                launch {
-                    viewModel.createEvent(
-                        token,
-                        title,
-                        name.toRequestBody("text/plain".toMediaType()),
-                        id.toRequestBody("text/plain".toMediaType()),
-                        lat.toRequestBody("text/plain".toMediaType()),
-                        lng.toRequestBody("text/plain".toMediaType()),
-                        contact,
-                        description,
-                        date,
-                        location,
-                        link,
-                        imageMultipart
-                    ).collect {
-                        when (it) {
-                            is Resource.Success -> {
-                                showLoading(false)
-                                Toast.makeText(
-                                    this@CreateEventActivity, it.data.message, Toast.LENGTH_LONG
-                                ).show()
-                                finish()
-                            }
 
-                            is Resource.Error -> {
-                                showLoading(false)
-                                Toast.makeText(
-                                    this@CreateEventActivity,
-                                    resources.getString(R.string.regist_error_message),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                    lifecycleScope.launch {
+                        launch {
+                            viewModel.createEvent(
+                                token,
+                                title,
+                                name.toRequestBody("text/plain".toMediaType()),
+                                id.toRequestBody("text/plain".toMediaType()),
+                                lat.toRequestBody("text/plain".toMediaType()),
+                                lng.toRequestBody("text/plain".toMediaType()),
+                                contact,
+                                description,
+                                date,
+                                location,
+                                link,
+                                imageMultipart
+                            ).collect {
+                                when (it) {
+                                    is Resource.Success -> {
+                                        showLoading(false)
+                                        Toast.makeText(
+                                            this@CreateEventActivity,
+                                            it.data.message,
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        finish()
+                                        viewModel.delete()
+                                    }
 
-                            is Resource.Loading -> {
-                                showLoading(true)
+                                    is Resource.Error -> {
+                                        showLoading(false)
+                                        Toast.makeText(
+                                            this@CreateEventActivity,
+                                            resources.getString(R.string.create_event_failed),
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+
+                                    is Resource.Loading -> {
+                                        showLoading(true)
+                                    }
+                                }
                             }
                         }
                     }
-                }
-            }
+        }
+    }
 
+    private fun setButtonEnable(){
+        binding.apply {
+            btnCreate.isEnabled = name.isNotEmpty() && title.toString().isNotEmpty() && location.isNotEmpty() && getFile != null&& eventNameEditText.error == null && eventContactEditTextLayout.error == null && eventDescriptionEditTextLayout.error == null && eventLocationEditTextLayout.error == null && eventWAEditTextLayout.error == null && eventContactEditTextLayout.error == null
         }
     }
 

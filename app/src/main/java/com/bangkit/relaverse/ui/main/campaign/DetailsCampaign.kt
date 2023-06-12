@@ -3,9 +3,11 @@ package com.bangkit.relaverse.ui.main.campaign
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.relaverse.R
@@ -13,10 +15,11 @@ import com.bangkit.relaverse.data.remote.response.Campaign
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.data.utils.withDateFormat
 import com.bangkit.relaverse.databinding.ActivityDetailsCampaignBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
-import com.bangkit.relaverse.ui.main.DetailViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.DetailViewModel
 import com.bangkit.relaverse.ui.main.home.MapsActivity
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailsCampaign : AppCompatActivity() {
@@ -25,6 +28,7 @@ class DetailsCampaign : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsCampaignBinding
     var token: String = ""
     private var campaignId: Int? = null
+    private var code: Int? = null
     private val viewModel by viewModels<DetailViewModel> {
         ViewModelFactory.getInstance(this)
     }
@@ -40,13 +44,123 @@ class DetailsCampaign : AppCompatActivity() {
                 }
             }
         }
-        binding.btnListVolunteer.setOnClickListener {
-            val intent = Intent(this, ListUserActivity::class.java)
-            intent.putExtra(ListUserActivity.CAMPAIGN_ID, campaignId)
-            startActivity(intent)
-        }
-        loadDetail()
+        binding.apply {
 
+
+
+
+            btnListVolunteer.setOnClickListener {
+                val intent = Intent(this@DetailsCampaign, ListUserActivity::class.java)
+                intent.putExtra(ListUserActivity.CAMPAIGN_ID, campaignId)
+                startActivity(intent)
+            }
+            loadDetail()
+            code = intent.getIntExtra(EXTRA_CODE, 0)
+
+            isOwner()
+        }
+    }
+
+
+    private fun isOwner(){
+        binding.apply {
+            if (code == 0) {
+                    btnDelete.alpha = 1F
+                    btnLeave.isEnabled = false
+                    btnDelete.setOnClickListener {
+                    val dialogTitle = getString(R.string.delete)
+                    val dialogMessage = getString(R.string.message_delete)
+                    val alertDialogBuilder = AlertDialog.Builder(this@DetailsCampaign)
+                    with(alertDialogBuilder) {
+                        setTitle(dialogTitle)
+                        setMessage(dialogMessage)
+                        setCancelable(false)
+                        setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
+                        setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            deleteCampaign()
+                        }
+                    }
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
+                }
+
+
+
+            }else{
+                    btnLeave.alpha = 1F
+                    btnDelete.isEnabled = false
+                    btnLeave.setOnClickListener {
+                    val dialogTitle = getString(R.string.leave)
+                    val dialogMessage = getString(R.string.message_leave)
+                    val alertDialogBuilder = AlertDialog.Builder(this@DetailsCampaign)
+                    with(alertDialogBuilder) {
+                        setTitle(dialogTitle)
+                        setMessage(dialogMessage)
+                        setCancelable(false)
+                        setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
+                        setPositiveButton(getString(R.string.yes)) { _, _ ->
+                            leaveCampaign()
+                        }
+                    }
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
+                }
+
+
+
+
+            }
+        }
+
+    }
+
+
+    private fun leaveCampaign() {
+        lifecycleScope.launch {
+            viewModel.leaveCampaign(token, campaignId!!).collect { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        showLoading(true)
+                    }
+
+                    is Resource.Error -> {
+                        showLoading(false)
+                        showToast(getString(R.string.failed_leave_campaign))
+                    }
+
+                    is Resource.Success -> {
+                        showToast(getString(R.string.leave))
+                        finish()
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    private fun deleteCampaign() {
+        lifecycleScope.launch {
+                viewModel.deleteCampaign(token, campaignId!!).collect{ result ->
+                    when (result) {
+                        is Resource.Loading -> {
+                            showLoading(true)
+                        }
+
+                        is Resource.Error -> {
+                            showLoading(false)
+                            showToast(getString(R.string.failed_delete_campaign))
+                        }
+
+                        is Resource.Success -> {
+                            showToast(getString(R.string.deleted))
+                            finish()
+                        }
+                    }
+                }
+
+
+        }
     }
 
     private fun loadDetail() {
@@ -128,11 +242,15 @@ class DetailsCampaign : AppCompatActivity() {
         }
     }
 
+
+
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+
     companion object {
         const val CAMPAIGN_ID = "campaignId"
+        const val EXTRA_CODE = "CODE"
     }
 }
