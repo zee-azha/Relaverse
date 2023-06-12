@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +23,30 @@
         android:theme="@style/Theme.Relaverse"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.profile.PasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.campaign.ListUserActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBv1keqTCJTpBKqfBHCp8MWhbAG9Ybb-fw" />
+
+        <activity
+            android:name=".ui.main.home.MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".ui.main.campaign.create_event.LocationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_location" />
+        <activity
+            android:name=".ui.main.campaign.create_event.CreateEventActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.SplashScreen"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +54,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.auth.WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.RegisterActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.campaign.DetailsCampaign"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBv1keqTCJTpBKqfBHCp8MWhbAG9Ybb-fw" />
+
+        <activity
+            android:name=".ui.main.home.DetailsHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

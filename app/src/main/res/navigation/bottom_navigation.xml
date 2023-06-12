@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.bangkit.relaverse.ui.main.home.HomeFragment"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/joinedFragment"
+        android:name="com.bangkit.relaverse.ui.main.joined.JoinedFragment"
+        tools:layout="@layout/fragment_joined" />
+
+    <fragment
+        android:id="@+id/campaignFragment"
+        android:name="com.bangkit.relaverse.ui.main.campaign.CampaignFragment"
+        tools:layout="@layout/fragment_campaign" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.bangkit.relaverse.ui.main.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>
