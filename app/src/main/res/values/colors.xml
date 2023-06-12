@@ -4,6 +4,7 @@
     <color name="jungle_green">#1FAB89</color>
     <color name="green">#35A461</color>
     <color name="extra">#1CCCCD</color>
-    <color name="text_box">#F0F5F9</color>
+    <color name="enabled_color">#F0F5F9</color>
+    <color name="disabled_color">#000000</color>
     <color name="carmine">#960018</color>
 </resources>
