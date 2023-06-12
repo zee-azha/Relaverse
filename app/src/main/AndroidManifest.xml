@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
@@ -37,11 +38,11 @@
             android:exported="false"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".ui.create_event.LocationActivity"
+            android:name=".ui.main.campaign.create_event.LocationActivity"
             android:exported="false"
             android:label="@string/title_activity_location" />
         <activity
-            android:name=".ui.create_event.CreateEventActivity"
+            android:name=".ui.main.campaign.create_event.CreateEventActivity"
             android:exported="false" />
         <activity
             android:name=".ui.auth.SplashScreen"

@@ -14,9 +14,9 @@ import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentJoinedBinding
-import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bangkit.relaverse.ui.main.campaign.DetailsCampaign
 import com.bangkit.relaverse.viewmodel.JoinedViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 
 
 class JoinedFragment : Fragment() {

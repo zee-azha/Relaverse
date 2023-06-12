@@ -32,6 +32,7 @@ data class DeleteCampaignResponse(
     @field:SerializedName("message")
     val message: String,
 )
+
 @Parcelize
 data class CampaignData(
     @field:SerializedName("id")

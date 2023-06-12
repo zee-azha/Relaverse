@@ -13,8 +13,8 @@ import com.bangkit.relaverse.data.remote.response.Campaign
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.data.utils.withDateFormat
 import com.bangkit.relaverse.databinding.ActivityDetailsHomeBinding
-import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bangkit.relaverse.viewmodel.DetailViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
 import kotlinx.coroutines.launch
 

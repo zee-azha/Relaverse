@@ -1,4 +1,4 @@
-package com.bangkit.relaverse.ui.create_event
+package com.bangkit.relaverse.ui.main.campaign.create_event
 
 import android.Manifest
 import android.app.DatePickerDialog
@@ -17,8 +17,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.data.utils.Resource
-import com.bangkit.relaverse.data.utils.isValidEmail
-import com.bangkit.relaverse.data.utils.isValidPassword
 import com.bangkit.relaverse.data.utils.isValidPhoneNumber
 import com.bangkit.relaverse.data.utils.reduceFileImage
 import com.bangkit.relaverse.data.utils.uriToFile
@@ -321,56 +319,57 @@ class CreateEventActivity : AppCompatActivity() {
                 "photoEvent", file.name, requestImageFile
             )
 
-                    lifecycleScope.launch {
-                        launch {
-                            viewModel.createEvent(
-                                token,
-                                title,
-                                name.toRequestBody("text/plain".toMediaType()),
-                                id.toRequestBody("text/plain".toMediaType()),
-                                lat.toRequestBody("text/plain".toMediaType()),
-                                lng.toRequestBody("text/plain".toMediaType()),
-                                contact,
-                                description,
-                                date,
-                                location,
-                                link,
-                                imageMultipart
-                            ).collect {
-                                when (it) {
-                                    is Resource.Success -> {
-                                        showLoading(false)
-                                        Toast.makeText(
-                                            this@CreateEventActivity,
-                                            it.data.message,
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                        finish()
-                                        viewModel.delete()
-                                    }
+            lifecycleScope.launch {
+                launch {
+                    viewModel.createEvent(
+                        token,
+                        title,
+                        name.toRequestBody("text/plain".toMediaType()),
+                        id.toRequestBody("text/plain".toMediaType()),
+                        lat.toRequestBody("text/plain".toMediaType()),
+                        lng.toRequestBody("text/plain".toMediaType()),
+                        contact,
+                        description,
+                        date,
+                        location,
+                        link,
+                        imageMultipart
+                    ).collect {
+                        when (it) {
+                            is Resource.Success -> {
+                                showLoading(false)
+                                Toast.makeText(
+                                    this@CreateEventActivity,
+                                    it.data.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                finish()
+                                viewModel.delete()
+                            }
 
-                                    is Resource.Error -> {
-                                        showLoading(false)
-                                        Toast.makeText(
-                                            this@CreateEventActivity,
-                                            resources.getString(R.string.create_event_failed),
-                                            Toast.LENGTH_LONG
-                                        ).show()
-                                    }
+                            is Resource.Error -> {
+                                showLoading(false)
+                                Toast.makeText(
+                                    this@CreateEventActivity,
+                                    resources.getString(R.string.create_event_failed),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
 
-                                    is Resource.Loading -> {
-                                        showLoading(true)
-                                    }
-                                }
+                            is Resource.Loading -> {
+                                showLoading(true)
                             }
                         }
                     }
+                }
+            }
         }
     }
 
-    private fun setButtonEnable(){
+    private fun setButtonEnable() {
         binding.apply {
-            btnCreate.isEnabled = name.isNotEmpty() && title.toString().isNotEmpty() && location.isNotEmpty() && getFile != null&& eventNameEditText.error == null && eventContactEditTextLayout.error == null && eventDescriptionEditTextLayout.error == null && eventLocationEditTextLayout.error == null && eventWAEditTextLayout.error == null && eventContactEditTextLayout.error == null
+            btnCreate.isEnabled = name.isNotEmpty() && title.toString()
+                .isNotEmpty() && location.isNotEmpty() && getFile != null && eventNameEditText.error == null && eventContactEditTextLayout.error == null && eventDescriptionEditTextLayout.error == null && eventLocationEditTextLayout.error == null && eventWAEditTextLayout.error == null && eventContactEditTextLayout.error == null
         }
     }
 
