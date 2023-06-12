@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -71,9 +72,22 @@ class HomeFragment : Fragment() {
 
         binding.apply {
             btnLogout.setOnClickListener {
-                viewModel.logout()
-                startActivity(Intent(requireActivity(), WelcomeActivity::class.java))
-                requireActivity().finishAffinity()
+                val dialogTitle = getString(R.string.logout)
+                val dialogMessage = getString(R.string.message_logout)
+                val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                with(alertDialogBuilder) {
+                    setTitle(dialogTitle)
+                    setMessage(dialogMessage)
+                    setCancelable(false)
+                    setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
+                    setPositiveButton(getString(R.string.yes)) { _, _ ->
+                        viewModel.logout()
+                        startActivity(Intent(requireActivity(), WelcomeActivity::class.java))
+                        requireActivity().finishAffinity()
+                    }
+                }
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
 
             }
             refreshLocation.setOnClickListener {
