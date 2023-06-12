@@ -23,3 +23,11 @@ data class UserData(
     @field:SerializedName("eventList")
     val list: List<CampaignData>,
 )
+
+data class LeaveCampaign(
+    @field:SerializedName("error")
+    val error: Boolean,
+
+    @field:SerializedName("message")
+    val message: String,
+)

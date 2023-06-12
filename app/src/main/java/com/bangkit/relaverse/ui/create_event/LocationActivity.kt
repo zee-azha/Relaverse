@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.ColorInt
@@ -17,7 +18,8 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.bangkit.relaverse.R
 import com.bangkit.relaverse.databinding.ActivityLocationBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.CreateEventViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -83,10 +85,15 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             val address = geocoder.getFromLocation(
                 latLng.latitude, latLng.longitude, 1
             )
-            location = address!![0].getAddressLine(0).toString()
-            lat = latLng.latitude.toString()
-            lng = latLng.longitude.toString()
-            binding.eventLocationDetailEditText.setText(location)
+            if (address!!.size == 0){
+                Toast.makeText(this, getString(R.string.proper_location), Toast.LENGTH_SHORT).show();
+
+            }else {
+                location = address!![0].getAddressLine(0).toString()
+                lat = latLng.latitude.toString()
+                lng = latLng.longitude.toString()
+                binding.eventLocationDetailEditText.setText(location)
+            }
         }
 
         getMyLocation()

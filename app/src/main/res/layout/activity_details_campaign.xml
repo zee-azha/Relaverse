@@ -8,19 +8,42 @@
     android:fillViewport="true"
     tools:context=".ui.main.campaign.DetailsCampaign">
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp">
 
         <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:alpha="0"
+            android:contentDescription="@string/delete"
+            android:src="@drawable/baseline_delete_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/btn_leave"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:alpha="0"
+            android:contentDescription="@string/leave"
+            android:src="@drawable/baseline_leave_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/image_campaign"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_marginTop="8dp"
             android:contentDescription="@string/campaign_photo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_delete" />
 
         <TextView
             android:id="@+id/tv_campaignTitle"

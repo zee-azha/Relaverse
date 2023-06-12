@@ -1,4 +1,4 @@
-package com.bangkit.relaverse.ui.auth
+package com.bangkit.relaverse.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

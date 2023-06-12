@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.data.utils.UserAdapter
 import com.bangkit.relaverse.databinding.ActivityListUserBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.ListUserViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
 
 class ListUserActivity : AppCompatActivity() {

@@ -14,9 +14,9 @@ import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentJoinedBinding
-import com.bangkit.relaverse.ui.ViewModelFactory
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bangkit.relaverse.ui.main.campaign.DetailsCampaign
-import com.bangkit.relaverse.ui.main.home.DetailsHomeActivity
+import com.bangkit.relaverse.viewmodel.JoinedViewModel
 
 
 class JoinedFragment : Fragment() {
@@ -35,6 +35,11 @@ class JoinedFragment : Fragment() {
         setAdapter()
         getJoinedCampaign()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getJoinedCampaign()
     }
 
     private fun getJoinedCampaign() {
@@ -81,7 +86,8 @@ class JoinedFragment : Fragment() {
         campaignAdapter.setOnItemClickCallback(object : CampaignAdapter.OnItemClickCallback {
             override fun onItemClicked(campaignData: CampaignData) {
                 val intent = Intent(context, DetailsCampaign::class.java)
-                intent.putExtra(DetailsHomeActivity.CAMPAIGN_ID, campaignData.id)
+                intent.putExtra(DetailsCampaign.CAMPAIGN_ID, campaignData.id)
+                intent.putExtra(DetailsCampaign.EXTRA_CODE, 1)
                 startActivity(intent)
             }
         })

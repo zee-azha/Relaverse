@@ -1,17 +1,10 @@
-package com.bangkit.relaverse.ui
+package com.bangkit.relaverse.viewmodel
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.relaverse.data.RelaverseRepository
 import com.bangkit.relaverse.data.di.Injection
-import com.bangkit.relaverse.ui.auth.AuthViewModel
-import com.bangkit.relaverse.ui.create_event.CreateEventViewModel
-import com.bangkit.relaverse.ui.main.DetailViewModel
-import com.bangkit.relaverse.ui.main.MainViewModel
-import com.bangkit.relaverse.ui.main.campaign.ListUserViewModel
-import com.bangkit.relaverse.ui.main.joined.JoinedViewModel
-import com.bangkit.relaverse.ui.main.profile.ProfileViewModel
 
 class ViewModelFactory private constructor(
     private val repository: RelaverseRepository,
