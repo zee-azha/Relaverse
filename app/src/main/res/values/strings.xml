@@ -2,8 +2,6 @@
     <string name="app_name">Relaverse</string>
     <string name="title">Title Campaign</string>
     <string name="location">Location</string>
-    <string name="count">999</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="current_location">Current Location</string>
     <string name="add_campaign">Add Campaign</string>
     <string name="details">Details</string>
@@ -17,9 +15,6 @@
     <string name="home">Home</string>
     <string name="campaign">Your Campaign</string>
     <string name="profile">Profile</string>
-
-
-    <!-- Auth, Event, Profile Location-->
     <string name="regis_here"><u>Register Here</u></string>
     <string name="login_here"><u>Login Here</u></string>
     <string name="login">Login</string>
@@ -40,7 +35,6 @@
     <string name="failed_to_load_profile">Failed to load Profile User</string>
     <string name="phone_contact">Phone Contact</string>
     <string name="event_description">Event Description</string>
-    <string name="event_location">Event Location</string>
     <string name="link_group_whatsapp">Link Group WhatsApp</string>
     <string name="event_date">Event Date</string>
     <string name="create_event">Create Event</string>
@@ -52,61 +46,13 @@
     <string name="regist_error_message">Registration Failed, Please Check Your Data Field</string>
     <string name="register">Register</string>
     <string name="campaign_photo">Campaign Photo</string>
-    <string name="volunteer">Volunteer</string>
     <string name="refresh_location">Refresh location</string>
     <string name="failed_edit_profile">Failed to Update Profile</string>
     <string name="success_edit_profile">Success to Update Profile</string>
     <string name="confirm_same_password">New password and Confirm new password must be same</string>
     <string name="failed_change_password">Failed to change your password, make sure your current password is correct</string>
     <string name="success_change_password">Success to change your password</string>
-
-    <string name="campaigns">Campaigns</string>
-    <string name="about">About</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="address">Address</string>
-    <string name="title_activity_test">test</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
     <string name="save_profile">Save Profile</string>
     <string name="add_location">Add Location</string>
     <string name="error_permission">Not getting permissio</string>
@@ -114,8 +60,6 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="logout">Logout</string>
     <string name="joined_campaign">Joined</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fill_blank">Please don\'t leave it blank</string>
     <string name="error_email">This is not a valid email format</string>
     <string name="error_password">%d / 6</string>
@@ -132,6 +76,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="deleted">Campaign Deleted</string>
+    <string name="leaved">Leave Campaign Successful</string>
     <string name="failed_delete_campaign">Failed Delete Campaign</string>
     <string name="failed_leave_campaign">Failed to leave campaign</string>
     <string name="message_leave">Are you sure you want to leave this campaign?</string>

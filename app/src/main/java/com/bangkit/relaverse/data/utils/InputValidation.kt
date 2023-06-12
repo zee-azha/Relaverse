@@ -12,6 +12,6 @@ fun String.isValidPassword(): Boolean {
 }
 
 fun String.isValidPhoneNumber(): Boolean {
-    val regex = Regex("^08[0-9]{8,10}\$")
+    val regex = Regex("^08[0-9]{8,11}\$")
     return regex.matches(this)
 }

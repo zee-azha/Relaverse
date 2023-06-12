@@ -13,9 +13,9 @@ import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentCampaignBinding
-import com.bangkit.relaverse.viewmodel.ViewModelFactory
-import com.bangkit.relaverse.ui.create_event.CreateEventActivity
+import com.bangkit.relaverse.ui.main.campaign.create_event.CreateEventActivity
 import com.bangkit.relaverse.viewmodel.MainViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import kotlinx.coroutines.launch
 
 

@@ -134,10 +134,11 @@ interface ApiService {
     suspend fun deleteCampaign(
         @Header("Authorization") auth: String,
         @Path("campaignId") campaignId: Int,
-    ):DeleteCampaignResponse
+    ): DeleteCampaignResponse
+
     @DELETE("campaign/leavecampaign/{campaignId}")
     suspend fun leaveCampaign(
         @Header("Authorization") auth: String,
         @Path("campaignId") campaignId: Int,
-    ):DeleteCampaignResponse
+    ): DeleteCampaignResponse
 }

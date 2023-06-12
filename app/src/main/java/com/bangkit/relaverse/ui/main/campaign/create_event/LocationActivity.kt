@@ -1,4 +1,4 @@
-package com.bangkit.relaverse.ui.create_event
+package com.bangkit.relaverse.ui.main.campaign.create_event
 
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -85,11 +85,10 @@ class LocationActivity : AppCompatActivity(), OnMapReadyCallback {
             val address = geocoder.getFromLocation(
                 latLng.latitude, latLng.longitude, 1
             )
-            if (address!!.size == 0){
-                Toast.makeText(this, getString(R.string.proper_location), Toast.LENGTH_SHORT).show();
-
-            }else {
-                location = address!![0].getAddressLine(0).toString()
+            if (address!!.size == 0) {
+                Toast.makeText(this, getString(R.string.proper_location), Toast.LENGTH_SHORT).show()
+            } else {
+                location = address[0].getAddressLine(0).toString()
                 lat = latLng.latitude.toString()
                 lng = latLng.longitude.toString()
                 binding.eventLocationDetailEditText.setText(location)

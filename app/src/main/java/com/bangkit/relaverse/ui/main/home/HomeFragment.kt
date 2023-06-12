@@ -20,9 +20,9 @@ import com.bangkit.relaverse.data.remote.response.CampaignData
 import com.bangkit.relaverse.data.utils.CampaignAdapter
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.databinding.FragmentHomeBinding
-import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bangkit.relaverse.ui.auth.WelcomeActivity
 import com.bangkit.relaverse.viewmodel.MainViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng

@@ -13,9 +13,9 @@ import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.data.utils.isValidEmail
 import com.bangkit.relaverse.data.utils.isValidPassword
 import com.bangkit.relaverse.databinding.ActivityLoginBinding
-import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bangkit.relaverse.ui.main.MainActivity
 import com.bangkit.relaverse.viewmodel.AuthViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 

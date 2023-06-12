@@ -3,7 +3,6 @@ package com.bangkit.relaverse.ui.main.campaign
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -15,11 +14,10 @@ import com.bangkit.relaverse.data.remote.response.Campaign
 import com.bangkit.relaverse.data.utils.Resource
 import com.bangkit.relaverse.data.utils.withDateFormat
 import com.bangkit.relaverse.databinding.ActivityDetailsCampaignBinding
-import com.bangkit.relaverse.viewmodel.ViewModelFactory
-import com.bangkit.relaverse.viewmodel.DetailViewModel
 import com.bangkit.relaverse.ui.main.home.MapsActivity
+import com.bangkit.relaverse.viewmodel.DetailViewModel
+import com.bangkit.relaverse.viewmodel.ViewModelFactory
 import com.bumptech.glide.Glide
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DetailsCampaign : AppCompatActivity() {
@@ -47,8 +45,6 @@ class DetailsCampaign : AppCompatActivity() {
         binding.apply {
 
 
-
-
             btnListVolunteer.setOnClickListener {
                 val intent = Intent(this@DetailsCampaign, ListUserActivity::class.java)
                 intent.putExtra(ListUserActivity.CAMPAIGN_ID, campaignId)
@@ -62,12 +58,12 @@ class DetailsCampaign : AppCompatActivity() {
     }
 
 
-    private fun isOwner(){
+    private fun isOwner() {
         binding.apply {
             if (code == 0) {
-                    btnDelete.alpha = 1F
-                    btnLeave.isEnabled = false
-                    btnDelete.setOnClickListener {
+                btnDelete.alpha = 1F
+                btnLeave.isEnabled = false
+                btnDelete.setOnClickListener {
                     val dialogTitle = getString(R.string.delete)
                     val dialogMessage = getString(R.string.message_delete)
                     val alertDialogBuilder = AlertDialog.Builder(this@DetailsCampaign)
@@ -85,11 +81,10 @@ class DetailsCampaign : AppCompatActivity() {
                 }
 
 
-
-            }else{
-                    btnLeave.alpha = 1F
-                    btnDelete.isEnabled = false
-                    btnLeave.setOnClickListener {
+            } else {
+                btnLeave.alpha = 1F
+                btnDelete.isEnabled = false
+                btnLeave.setOnClickListener {
                     val dialogTitle = getString(R.string.leave)
                     val dialogMessage = getString(R.string.message_leave)
                     val alertDialogBuilder = AlertDialog.Builder(this@DetailsCampaign)
@@ -105,8 +100,6 @@ class DetailsCampaign : AppCompatActivity() {
                     val alertDialog = alertDialogBuilder.create()
                     alertDialog.show()
                 }
-
-
 
 
             }
@@ -129,7 +122,7 @@ class DetailsCampaign : AppCompatActivity() {
                     }
 
                     is Resource.Success -> {
-                        showToast(getString(R.string.leave))
+                        showToast(getString(R.string.leaved))
                         finish()
                     }
                 }
@@ -138,26 +131,25 @@ class DetailsCampaign : AppCompatActivity() {
     }
 
 
-
     private fun deleteCampaign() {
         lifecycleScope.launch {
-                viewModel.deleteCampaign(token, campaignId!!).collect{ result ->
-                    when (result) {
-                        is Resource.Loading -> {
-                            showLoading(true)
-                        }
+            viewModel.deleteCampaign(token, campaignId!!).collect { result ->
+                when (result) {
+                    is Resource.Loading -> {
+                        showLoading(true)
+                    }
 
-                        is Resource.Error -> {
-                            showLoading(false)
-                            showToast(getString(R.string.failed_delete_campaign))
-                        }
+                    is Resource.Error -> {
+                        showLoading(false)
+                        showToast(getString(R.string.failed_delete_campaign))
+                    }
 
-                        is Resource.Success -> {
-                            showToast(getString(R.string.deleted))
-                            finish()
-                        }
+                    is Resource.Success -> {
+                        showToast(getString(R.string.deleted))
+                        finish()
                     }
                 }
+            }
 
 
         }
@@ -241,7 +233,6 @@ class DetailsCampaign : AppCompatActivity() {
             }
         }
     }
-
 
 
     private fun showToast(message: String) {

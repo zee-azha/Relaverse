@@ -59,7 +59,6 @@ class ProfileFragment : Fragment() {
 
                     is Resource.Success -> {
                         showLoading(false)
-                        showToast(result.data.message)
                         showProfile(result.data.user)
                     }
                 }
@@ -72,9 +71,7 @@ class ProfileFragment : Fragment() {
             nameEditText.setText(user.name)
             emailEditText.setText(user.email)
             phoneEditText.setText(user.phoneNumber)
-            addressEditText.setText(
-                latLngToAddress(user.latitude!!, user.longitude!!)
-            )
+            addressEditText.setText(latLngToAddress(user.latitude!!, user.longitude!!))
         }
     }
 
