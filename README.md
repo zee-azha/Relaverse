@@ -14,12 +14,12 @@ RelaVerse is an application to create campaigns that align with environmental th
 
 |              Name              | Bangkit-ID |   Learning Path    |                                                       Contact Link                                                       |
 | :----------------------------: | :--------: | :----------------: | :----------------------------------------------------------------------------------------------------------------------: |
-| Jason Suhali | M264DSX1746 |  Machine Learning  |            [LinkedIn](https://www.linkedin.com/in/jason-suhali-604814222/)           |
-|   Ngakan Putu Widyasprana     | M368DSX3659 |  Machine Learning  |                [LinkedIn](https://www.linkedin.com/in/muhammad-aimar-rizki-utama-75479b21b/)              |
-|     Kristian Ekachandra            | A264DSX2268| Mobile Development |              [LinkedIn](https://www.linkedin.com/in/kristian-ekachandra/)             |
-|     Mohammad Faiz Azhary     | A363DSX1260 | Mobile Development |    [LinkedIn](https://www.linkedin.com/in/mohammad-faiz-azhary/)    |
-|      Muhammad Aimar Rizki Utama     |C360DSX0650 |  Cloud Computing   | [LinkedIn](https://www.linkedin.com/in/muhammad-aimar-rizki-utama-75479b21b/)  |
-|        Fakhrity Hikmawan         | C360DSX1665 |  Cloud Computing   |        [LinkedIn](https://www.linkedin.com/in/fakhrity-hikmawan/)      |
+| Jason Suhali | M264DSX1746 |  Machine Learning  |            [LinkedIn](https://www.linkedin.com/in/jason-suhali-604814222/)  and [GitHub](https://github.com/JasonXander)         |
+|   Ngakan Putu Widyasprana     | M368DSX3659 |  Machine Learning  |                [LinkedIn](https://www.linkedin.com/in/ngakanwp/)    and [GitHub](https://github.com/NgakanWidyasprana)            |
+|     Kristian Ekachandra            | A264DSX2268| Mobile Development |              [LinkedIn](https://www.linkedin.com/in/kristian-ekachandra/)       and [GitHub](https://github.com/KristianEka)        |
+|     Mohammad Faiz Azhary     | A363DSX1260 | Mobile Development |    [LinkedIn](https://www.linkedin.com/in/mohammad-faiz-azhary/)  and [GitHub](https://github.com/zee-azha)    |
+|      Muhammad Aimar Rizki Utama     |C360DSX0650 |  Cloud Computing   | [LinkedIn](https://www.linkedin.com/in/muhammad-aimar-rizki-utama-75479b21b/) and [GitHub](https://github.com/aimrzky)   |
+|        Fakhrity Hikmawan         | C360DSX1665 |  Cloud Computing   |        [LinkedIn](https://www.linkedin.com/in/fakhrity-hikmawan/)   and [GitHub](https://github.com/fahixa)     |
 
 
 ## About this project
