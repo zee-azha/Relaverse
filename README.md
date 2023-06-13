@@ -41,7 +41,9 @@ RelaVerse is an application to create campaigns that align with environmental th
 ## Mobile Development Documentation
 The source code of the Android app of Travens using Kotlin in order to complete the Bangkit Capstone Project.
 
-
+- ### UI/UX Desain
+     - [Design Mandatory](https://www.figma.com/file/LFX9TjzgtxcDlujvelln9t/Bangkit?type=design&node-id=0-1&t=7Zo4J7WjP6PRk1FD-0)
+     - [HiFi](https://www.figma.com/file/LFX9TjzgtxcDlujvelln9t/Bangkit?type=design&node-id=241-116&t=7Zo4J7WjP6PRk1FD-0)
 
  - ### Feature
     - Splash Screen
