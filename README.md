@@ -88,5 +88,4 @@ The source code of the Android app of Travens using Kotlin in order to complete 
 
 
 ## License
-Distributed under the MIT License. See `LICENSE` for more information.
 Bangkit Capstone Team ID :  C23-PS235
