@@ -16,7 +16,7 @@ RelaVerse is an application to create campaigns that align with environmental th
 | :----------------------------: | :--------: | :----------------: | :----------------------------------------------------------------------------------------------------------------------: |
 | Jason Suhali | M264DSX1746 |  Machine Learning  |            [LinkedIn](https://www.linkedin.com/in/jason-suhali-604814222/)           |
 |   Ngakan Putu Widyasprana     | M368DSX3659 |  Machine Learning  |                [LinkedIn](https://www.linkedin.com/in/muhammad-aimar-rizki-utama-75479b21b/)              |
-|     Kristian Ekachandra            | A264DSX2268| Mobile Development |              [LinkedIn](https://www.linkedin.com/in/kristian-ekachandra/)             |
+|     [Kristian Ekachandra](https://github.com/KristianEka)            | A264DSX2268| Mobile Development |              [LinkedIn](https://www.linkedin.com/in/kristian-ekachandra/)             |
 |     Mohammad Faiz Azhary     | A363DSX1260 | Mobile Development |    [LinkedIn](https://www.linkedin.com/in/mohammad-faiz-azhary/)    |
 |      Muhammad Aimar Rizki Utama     |C360DSX0650 |  Cloud Computing   | [LinkedIn](https://www.linkedin.com/in/muhammad-aimar-rizki-utama-75479b21b/)  |
 |        Fakhrity Hikmawan         | C360DSX1665 |  Cloud Computing   |        [LinkedIn](https://www.linkedin.com/in/fakhrity-hikmawan/)      |
@@ -29,15 +29,16 @@ RelaVerse is an application to create campaigns that align with environmental th
 
 |   Learning Paths   |                                Link                                |
 | :----------------: | :----------------------------------------------------------------: |
-| Mobile Development | [Github](https://github.com/zee-azha/Relaverse) |
-| Cloud Computing  | [Github](https://github.com/aimrzky/Relaverse-CC)  |
-| Machine Learning  | [Github](https://github.com/NgakanWidyasprana/RelaVerse-ML/tree/main)  |
+| Mobile Development | [GitHub](https://github.com/zee-azha/Relaverse) |
+| Cloud Computing  | [GitHub](https://github.com/aimrzky/Relaverse-CC)  |
+| Machine Learning  | [GitHub](https://github.com/NgakanWidyasprana/RelaVerse-ML/tree/main)  |
 
 
 ## Documentation
-![Relavers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/8.png)
-![Relavers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/9.png)
-![Relavers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/10.png)
+![RelaVers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/8.png)
+![RelaVers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/9.png)
+![RelaVers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/10.png)
+
 ## Mobile Development Documentation
 The source code of the Android app of Travens using Kotlin in order to complete the Bangkit Capstone Project.
 
@@ -84,8 +85,7 @@ The source code of the Android app of Travens using Kotlin in order to complete 
         - Enter your API in buildConfigField `build.graddle`
            ``` default config {
                buildConfigField("String", "MAPS_API_KEY", '"Your API Key"')}
-
-
+           ```
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
