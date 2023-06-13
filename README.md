@@ -12,14 +12,18 @@ RelaVerse is an application to create campaigns that align with environmental th
 
 ## The Team
 
-|   Studend ID    |              Name              | Bangkit-ID |   Learning Path    |                                                       Contact Link                                                       |
-:----------------------------: | :--------: | :----------------: | :----------------------------------------------------------------------------------------------------------------------: |
+|              Name              | Bangkit-ID |   Learning Path    |                                                       Contact Link                                                       |
+| :----------------------------: | :--------: | :----------------: | :----------------------------------------------------------------------------------------------------------------------: |
 | Jason Suhali | M264DSX1746 |  Machine Learning  |            [LinkedIn](https://www.linkedin.com/in/jason-suhali-604814222/)           |
 |   Ngakan Putu Widyasprana     | M368DSX3659 |  Machine Learning  |                [LinkedIn](https://www.linkedin.com/in/muhammad-aimar-rizki-utama-75479b21b/)              |
 |     Kristian Ekachandra            | A264DSX2268| Mobile Development |              [LinkedIn](https://www.linkedin.com/in/kristian-ekachandra/)             |
 |     Mohammad Faiz Azhary     | A363DSX1260 | Mobile Development |    [LinkedIn](https://www.linkedin.com/in/mohammad-faiz-azhary/)    |
 |      Muhammad Aimar Rizki Utama     |C360DSX0650 |  Cloud Computing   | [LinkedIn](https://www.linkedin.com/in/muhammad-aimar-rizki-utama-75479b21b/)  |
 |        Fakhrity Hikmawan         | C360DSX1665 |  Cloud Computing   |        [LinkedIn](https://www.linkedin.com/in/fakhrity-hikmawan/)      |
+
+
+## About this project
+
 
 ## Repository
 
@@ -31,11 +35,11 @@ RelaVerse is an application to create campaigns that align with environmental th
 
 
 ## Documentation
-![Relavers] (https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/8.png)
-![Relavers] (https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/9.png)
-![Relavers] (https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/10.png)
+![Relavers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/8.png)
+![Relavers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/9.png)
+![Relavers](https://raw.githubusercontent.com/zee-azha/Asset/main/MobileApps/10.png)
 ## Mobile Development Documentation
-The source code of Android app of Travens using Kotlin in order to complete Bangkit Capstone Project.
+The source code of the Android app of Travens using Kotlin in order to complete the Bangkit Capstone Project.
 
 
 
@@ -71,13 +75,13 @@ The source code of Android app of Travens using Kotlin in order to complete Bang
 
       - #### Installation
         - Get an API Key at [Google Maps Platform](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
-        - Clone this repository and import into Android Studio    
+        - Clone this repository and import it into Android Studio    
             ```
                https://github.com/ferddev21/pet2home.git
             ``` 
         - Enter your API in buildConfigField `build.graddle`
-           ``` defaultConfig {
-               buildConfigField("String", "MAPS_API_KEY", '"Your Api Key"')}
+           ``` default config {
+               buildConfigField("String", "MAPS_API_KEY", '"Your API Key"')}
 
 
 
