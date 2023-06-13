@@ -75,16 +75,6 @@ The source code of the Android app of Travens using Kotlin in order to complete 
         - [Android Studio](https://developer.android.com/studio)
         - JRE (Java Runtime Environment) or JDK (Java Development Kit).
 
-      - #### Installation
-        - Get an API Key at [Google Maps Platform](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
-        - Clone this repository and import it into Android Studio    
-            ```
-               https://github.com/ferddev21/pet2home.git
-            ``` 
-        - Enter your API in buildConfigField `build.graddle`
-           ``` default config {
-               buildConfigField("String", "MAPS_API_KEY", '"Your API Key"')}
-
 
 
 ## License
