@@ -23,7 +23,7 @@ RelaVerse is an application to create campaigns that align with environmental th
 
 
 <p align="center">
- <b>About this project</b>
+ ##About this project
 </p>
 
 ## Repository
