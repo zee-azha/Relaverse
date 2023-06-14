@@ -22,8 +22,10 @@ RelaVerse is an application to create campaigns that align with environmental th
 |        Fakhrity Hikmawan         | C360DSX1665 |  Cloud Computing   |        [LinkedIn](https://www.linkedin.com/in/fakhrity-hikmawan/)   and [GitHub](https://github.com/fahixa)     |
 
 
-## About this project
-
+## 
+<p align="center">
+ About this project
+</p>
 
 ## Repository
 
